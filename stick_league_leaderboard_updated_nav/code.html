@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style="width: 1280px; height: 1741px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STICK LEAGUE | LEADERBOARD</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Oswald:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom "Rough Ink" Border Styles */
+        .rough-border {
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .rough-border::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 2px solid #822621;
+            mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 L10 0 L90 5 L100 15 L95 90 L85 100 L10 95 L0 85 Z' fill='black'/%3E%3C/svg%3E");
+            mask-size: 100% 100%;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .ink-scratch {
+            background-image: linear-gradient(90deg, transparent 0%, #822621 50%, transparent 100%);
+            height: 1px;
+            width: 100%;
+            opacity: 0.3;
+        }
+
+        .podium-glow {
+            box-shadow: inset 0 0 40px rgba(130, 38, 33, 0.2);
+        }
+
+        .noise-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-1px, 1px); }
+            50% { transform: translate(1px, -1px); }
+            75% { transform: translate(-1px, -1px); }
+            100% { transform: translate(0, 0); }
+        }
+        .btn-hover-shake:hover {
+            animation: shake 0.1s infinite;
+        }
+
+        .tier-badge {
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#131313",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-secondary-fixed-variant": "#7d2b25",
+                        "surface-tint": "#ffb4ab",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "primary": "#ffb4ab",
+                        "on-surface-variant": "#ddc0bd",
+                        "on-error": "#690005",
+                        "secondary-container": "#802d27",
+                        "on-primary": "#630e0d",
+                        "on-secondary": "#5f1511",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#ff9f94",
+                        "surface-dim": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "outline": "#a58b88",
+                        "secondary-fixed-dim": "#ffb4ab",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#822621",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "outline-variant": "#564240",
+                        "surface-container-lowest": "#0e0e0e",
+                        "background": "#131313",
+                        "secondary": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-container": "#ff9a8f",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-container": "#822621",
+                        "secondary-fixed": "#ffdad6",
+                        "tertiary": "#c9c6c0",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary-container": "#b7b5af",
+                        "on-tertiary": "#31312c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-primary-fixed": "#410002",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#410002",
+                        "surface-container": "#201f1f",
+                        "inverse-primary": "#a23d36",
+                        "surface-variant": "#353534",
+                        "tertiary-container": "#474742",
+                        "surface-bright": "#3a3939"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Oswald"],
+                        "display-lg": ["Oswald"],
+                        "headline-lg-mobile": ["Oswald"],
+                        "headline-lg": ["Oswald"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Oswald"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<div class="noise-bg fixed inset-0 z-0" style="transform: translate(-1.85156px, -3.19644px);"></div>
+<!-- Navigation Drawer (Side) -->
+<aside class="fixed inset-y-0 left-0 w-80 border-r border-outline-variant z-50 hidden lg:flex flex-col py-8 bg-surface-container-lowest">
+<div class="px-8 mb-12">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter leading-none">STICK LEAGUE PRO</h1>
+</div>
+<nav class="flex-1 px-4 space-y-2"><a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#"><span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">home</span><span class="font-label-caps text-label-caps">HOME</span></a><a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#"><span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">groups</span><span class="font-label-caps text-label-caps">TEAMS</span></a><a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#"><span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">sports_esports</span><span class="font-label-caps text-label-caps">MATCHES</span></a><a class="flex items-center gap-4 px-4 py-4 bg-primary-container text-on-primary-container rounded-none border-l-4 border-primary group" href="#"><span class="material-symbols-outlined group-hover:scale-110 transition-transform">leaderboard</span><span class="font-label-caps text-label-caps">LEADERBOARD</span></a><a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#"><span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">emoji_events</span><span class="font-label-caps text-label-caps">TOURNAMENT</span></a><a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#"><span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">search</span><span class="font-label-caps text-label-caps">SEARCH</span></a><a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#"><span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">admin_panel_settings</span><span class="font-label-caps text-label-caps">ADMIN PANEL</span></a></nav>
+<div class="px-8 pt-8 border-t border-outline-variant">
+<div class="flex items-center gap-4 p-4 bg-surface-container-high border border-outline-variant">
+<div class="w-10 h-10 rounded-full bg-primary-container overflow-hidden border border-primary/30">
+<img class="w-full h-full object-cover" data-alt="A gritty, hyper-detailed portrait of a professional gamer with red lighting reflecting on their sharp features. Dark industrial background with subtle smoke effects and high contrast ink-stain aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEv-o4N0fcS1fVX9dzMESSO8IB5NDCbP5VcM_7DJ4a-ThTIPTXn3HXBxtLFSGKGHDBn0NDPub0a7z5ryCMJ20DYDha0xt5CatBlUqB7ikSf2YWV47GX0hnUVGHJ8wUdjwmpXbp8NHsIgjrmMn3gSytKe7Trd8VYiWbYBxagTsGynx5ye-XMtLBfZINOnFWMrGYT7sXM22DfhwEd6rPkAtqgyYeOrGiVhTrAurC9SFlshZT24KnHb50FEM7KEtLGP-Cpl8FC_nAwJg"/>
+</div>
+<div class="flex-1">
+<p class="font-label-caps text-label-caps text-primary">ADMIN_01</p>
+<p class="text-xs text-on-surface-variant font-label-sm">ELITE TIER</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-80 relative z-10 flex flex-col min-h-screen">
+<!-- Top AppBar -->
+<header class="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-secondary-container/50">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">radio_button_checked</span>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">SEASON 01: THE EMERGENCE</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary-container text-on-primary-container px-6 py-2 font-label-caps text-label-caps btn-hover-shake active:scale-95 transition-transform">
+                        JOIN SEASON
+                    </button>
+</div>
+</div>
+</header>
+<!-- Podium Section -->
+<section class="py-12 px-gutter max-w-container-max mx-auto w-full">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-end mb-16">
+<!-- Rank 2 -->
+<div class="order-2 md:order-1 flex flex-col items-center">
+<div class="relative mb-6 group">
+<div class="w-48 h-48 rounded-full border-4 border-outline-variant p-2 group-hover:border-primary transition-colors duration-500 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A dark and aggressive emblem for the Red Reapers team, featuring a stylized red scythe with ink-drip textures and sharp gothic typography. High contrast red and black color palette with a prestige gaming aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTHOCJ2mRUN5yhPkgktVj1GH8mpoUuE8ImEh8P1OrZAVOG9VCnHeth_aSvQdpGQLDurDTtKmdNbjPFemy0k8LHHPwbgyOeOEWbuOU64gY1nDd3_OdjqDwgIMgC8wQed5CFtDpOF4dvpWK6sVGOdS8Wm3nnMKdQ5dq1AXYmX1q7VTh-vuBlRsEvuBUfRu2ARiGPVZf-944orK8tI4h7gvbFdYwjLLEqBasiHHgA_iWqv4aAghrk_OKum5AXNJJ9AYLFaai_3H1dSBY"/>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-outline-variant px-4 py-1 font-headline-md text-on-surface">#2</div>
+</div>
+<div class="text-center">
+<h3 class="font-headline-md text-headline-md text-primary mb-1">RED REAPERS</h3>
+<div class="flex justify-center gap-4 items-center">
+<span class="text-on-surface-variant font-label-sm">WIN RATE</span>
+<span class="text-primary font-headline-md">78.4%</span>
+</div>
+</div>
+</div>
+<!-- Rank 1 (Centerpiece) -->
+<div class="order-1 md:order-2 flex flex-col items-center scale-110 z-10">
+<div class="relative mb-8 group">
+<!-- Red Aura Glow -->
+<div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full"></div>
+<div class="w-64 h-64 rounded-full border-8 border-primary p-3 group-hover:scale-105 transition-transform duration-500 overflow-hidden bg-surface-container-highest shadow-[0_0_50px_rgba(130,38,33,0.4)]">
+<img class="w-full h-full object-cover" data-alt="A prestigious, menacing team emblem for Shadow Syndicate. A stylized hooded figure with glowing red eyes surrounded by dark geometric patterns and hand-drawn ink splatters. Professional esports branding, dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByaooaLqdvJaI7Kspk_nsb7LYwP-3WRw9Ep3wWkkDn7D1-jW19vPj4jC6nIaSuhqYDv_cuFCYj3V2DcP3JYi3EiGwaQUNm7f2ADASnrNhP90FjuECDFfW7q-QpvrCfkdw3bHt28ASpoaFVT9MIBGfpBYj8pQQfP6JjbN3TJPtUcfxDiDTN4tAJYdzzvhEPWmyYiXWHmBt-dWqLEUfHEw2KX_whVTvuf2Ok4e_gVFz1nTH6Ov0_4uoa_35MKG-OiTYHqVoatp35rN0"/>
+</div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-8 py-2 font-headline-lg text-2xl font-bold tracking-widest shadow-xl">#1</div>
+</div>
+<div class="text-center">
+<h3 class="font-headline-lg text-headline-lg text-primary mb-1 tracking-wider">SHADOW SYNDICATE</h3>
+<div class="flex justify-center gap-6 items-center">
+<div class="flex flex-col items-center">
+<span class="text-on-surface-variant font-label-sm">WIN RATE</span>
+<span class="text-primary font-headline-lg text-3xl">92.1%</span>
+</div>
+<div class="h-10 w-px bg-outline-variant opacity-30"></div>
+<div class="flex flex-col items-center">
+<span class="text-on-surface-variant font-label-sm">STREAK</span>
+<span class="text-primary font-headline-lg text-3xl">14-0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="order-3 md:order-3 flex flex-col items-center">
+<div class="relative mb-6 group">
+<div class="w-48 h-48 rounded-full border-4 border-outline-variant p-2 group-hover:border-primary transition-colors duration-500 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A robotic, industrial team emblem for Iron Phantom. A stylized chrome skull with mechanical glowing parts and dark red energy arcs. Hand-drawn brush stroke textures and dark grey tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9ZlOcvbvNeJl15GmofbInL46EUf0-ePZ4eeScc5tEvizeqT91aW2O6picxcV31ibzveLrdakI57kYjZjkh92E0XAhWihYRCox4jrReuUt4Uqxg5liVy7-lWK1VKpPBxtyA585nPV75Q2oF5lileQDA_CfhbMdVdOQos7IgR7rsFgJrGm8bztBq9pCDh96EHVFgKXTYfYB5ulqMytOM7vS7_e7JStn4g7hYLpr8ByHe_7seUYHbAIXUDIPPrhcwzBUE9Dq6KmUb24"/>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-outline-variant px-4 py-1 font-headline-md text-on-surface">#3</div>
+</div>
+<div class="text-center">
+<h3 class="font-headline-md text-headline-md text-primary mb-1 text-on-secondary-fixed-variant">IRON PHANTOM</h3>
+<div class="flex justify-center gap-4 items-center">
+<span class="text-on-surface-variant font-label-sm">WIN RATE</span>
+<span class="text-primary font-headline-md">71.8%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Challengers Table -->
+<section class="flex-1 bg-surface-container-lowest px-gutter py-16 relative overflow-hidden">
+<div class="max-w-container-max mx-auto relative z-10">
+<div class="flex justify-between items-end mb-12 border-b border-outline-variant pb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-2">CHALLENGERS</h2>
+<p class="text-on-surface-variant font-label-sm tracking-widest">TOP 100 RANKED TEAMS | LAST UPDATED: 2M AGO</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-high px-6 py-3 border border-outline-variant flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">filter_list</span>
+<span class="font-label-caps text-label-caps">REGION: ALL</span>
+</div>
+<div class="bg-surface-container-high px-6 py-3 border border-outline-variant flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">sort</span>
+<span class="font-label-caps text-label-caps">SORT: RANK</span>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Table Header -->
+<div class="grid grid-cols-12 px-8 py-4 bg-surface-container-highest/50 font-label-caps text-label-caps text-on-surface-variant">
+<div class="col-span-1">RANK</div>
+<div class="col-span-4">TEAM NAME</div>
+<div class="col-span-2">TIER</div>
+<div class="col-span-2 text-center">W/L</div>
+<div class="col-span-1 text-right">POINTS</div>
+<div class="col-span-2 text-right">STATUS</div>
+</div>
+<!-- Ranking Item 4 -->
+<div class="grid grid-cols-12 px-8 py-6 bg-surface-container-low border border-outline-variant hover:border-primary/50 transition-colors group cursor-pointer relative items-center">
+<div class="col-span-1 font-headline-md text-on-surface group-hover:text-primary transition-colors">04</div>
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A team logo for Cyber Drifters featuring neon-red glitches and a futuristic vehicle silhouette. Gritty texture and industrial punk style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8RTmTucPAaKeMykw-ylrV0HCGrJ_PmdKe4xrOaEFro1VO4M1l9vvhBN7tQzFH6BbIp-CMxkS3vcCMEGjDUE1xjBW_spuDc_NMCUqepe8S4Zb0aEZ5YkjyusKutdOMgyZuyNf-CRYWXNNf_nT5J184DOQXCBS7aAbUnZDFVJhTgSrWiZ_Ers2XE3fXf7GczzdRh6d8M5ft75ZV7UBNZvI92oKFBKgQa0sNeYhpM4hTAe7B8rYUL7m0a_BIIyfNYZMuWxDu2VooZ0s"/>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">CYBER DRIFTERS</span>
+</div>
+<div class="col-span-2">
+<div class="tier-badge bg-primary-container text-on-primary-container inline-block px-4 py-1 font-label-caps text-xs">ELITE</div>
+</div>
+<div class="col-span-2 text-center font-label-sm text-on-surface-variant">
+<span class="text-primary">142</span> / <span class="text-on-error">42</span>
+</div>
+<div class="col-span-1 text-right font-label-sm text-primary">2,840</div>
+<div class="col-span-2 text-right">
+<span class="flex items-center justify-end gap-2 text-green-500 font-label-sm">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> ACTIVE
+                            </span>
+</div>
+<div class="absolute bottom-0 left-0 ink-scratch group-hover:opacity-100 transition-opacity"></div>
+</div>
+<!-- Ranking Item 5 -->
+<div class="grid grid-cols-12 px-8 py-6 bg-surface-container-low border border-outline-variant hover:border-primary/50 transition-colors group cursor-pointer relative items-center">
+<div class="col-span-1 font-headline-md text-on-surface group-hover:text-primary transition-colors">05</div>
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist logo for Apex Hunters showing three red spears pointing upwards. Hand-drawn charcoal texture on a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9LNRQzhhnSStgvlKjiLdvwKd9LbMGWy3Dfd-5DpXOeYJ-ods_GT5CSXGOaJq-jUeSUUrW0u3EGbnBOnhLzzH_9l3bLWLxuNU9OwtAtSo36AtIi6OdTRvwuzBsl775XbBjSrddxaGTrmoU7QIeA6t61nkA-1XxcMudOTWKOmKXZd0evLMd1aEoha8MAjjertUomVptewFgs73NFRlfV-PE1ze0MJFTTVQksVwm5B4ZtIYBsyNqfvWdxxhAX39ckFHi9Y-H7d3wxH8"/>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">APEX HUNTERS</span>
+</div>
+<div class="col-span-2">
+<div class="tier-badge bg-primary-container text-on-primary-container inline-block px-4 py-1 font-label-caps text-xs">ELITE</div>
+</div>
+<div class="col-span-2 text-center font-label-sm text-on-surface-variant">
+<span class="text-primary">138</span> / <span class="text-on-error">51</span>
+</div>
+<div class="col-span-1 text-right font-label-sm text-primary">2,710</div>
+<div class="col-span-2 text-right">
+<span class="flex items-center justify-end gap-2 text-green-500 font-label-sm">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> IN MATCH
+                            </span>
+</div>
+<div class="absolute bottom-0 left-0 ink-scratch group-hover:opacity-100 transition-opacity"></div>
+</div>
+<!-- Ranking Item 6 -->
+<div class="grid grid-cols-12 px-8 py-6 bg-surface-container-low border border-outline-variant hover:border-primary/50 transition-colors group cursor-pointer relative items-center">
+<div class="col-span-1 font-headline-md text-on-surface group-hover:text-primary transition-colors">06</div>
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Ghost Walkers team logo. A faint, sketchy outline of a skull wearing a tactical helmet. Faded ink aesthetic with deep red accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABFrF2O_bO8h-AMgrt1vxmdd--63DOqNcfZ6TfW4IhxH8heORQRd3Pb0VwlYipsOSHfu_8Asb5KA7ckK4GVW0TidrItf3dw5VArDZwDNGvxCijRBmE0bW3OSdcg-gJjUcn0xrOtJ0dSirh0_47PsS3KE7ux7jemSAI1LuV66wYgszLYD_9sTL6W9ltc-UJgRU2e7HJTnea9DmefxgZpRznhuAPkbuNtzYJ7sxg8iQ0usM4lE5HR91Y8yRDR2AKGn2rI1Z1obj9CdA"/>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">GHOST WALKERS</span>
+</div>
+<div class="col-span-2">
+<div class="tier-badge bg-outline-variant text-on-surface inline-block px-4 py-1 font-label-caps text-xs">DIAMOND</div>
+</div>
+<div class="col-span-2 text-center font-label-sm text-on-surface-variant">
+<span class="text-primary">121</span> / <span class="text-on-error">65</span>
+</div>
+<div class="col-span-1 text-right font-label-sm text-primary">2,450</div>
+<div class="col-span-2 text-right">
+<span class="flex items-center justify-end gap-2 text-on-surface-variant font-label-sm">
+<span class="w-2 h-2 rounded-full bg-on-surface-variant"></span> OFFLINE
+                            </span>
+</div>
+<div class="absolute bottom-0 left-0 ink-scratch group-hover:opacity-100 transition-opacity"></div>
+</div>
+<!-- Ranking Item 7 -->
+<div class="grid grid-cols-12 px-8 py-6 bg-surface-container-low border border-outline-variant hover:border-primary/50 transition-colors group cursor-pointer relative items-center">
+<div class="col-span-1 font-headline-md text-on-surface group-hover:text-primary transition-colors">07</div>
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Blood Moon esports logo featuring a crescent moon dripping with ink-red color. Sharp industrial lines and Gothic minimalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyPhRCdc6dWv-OoGRh5hOsEVeYnT1VVDPnU9hM2PY0DXIqDdechNXZVPjaRK6OFnq2TFwuHzSDSrJizM18r8k_2Oz2UEyRMi2tuW5q_v7xkC08CoyG1pD4ivvvWW9s_cSi1nUBW0wypm4zUyblQzldOOF7Ovc3RtqLo57trzdGYVmZmy36g3_ssDglERB-DrItt4Qy_9gUS-YT_UPBOFzJRkQ4VY0WiWmc3WvK-DKFpkqsLNh9WPMH70kETrorA4OGa_BNuGO2q7U"/>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">BLOOD MOON</span>
+</div>
+<div class="col-span-2">
+<div class="tier-badge bg-outline-variant text-on-surface inline-block px-4 py-1 font-label-caps text-xs">DIAMOND</div>
+</div>
+<div class="col-span-2 text-center font-label-sm text-on-surface-variant">
+<span class="text-primary">119</span> / <span class="text-on-error">68</span>
+</div>
+<div class="col-span-1 text-right font-label-sm text-primary">2,390</div>
+<div class="col-span-2 text-right">
+<span class="flex items-center justify-end gap-2 text-green-500 font-label-sm">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> ACTIVE
+                            </span>
+</div>
+<div class="absolute bottom-0 left-0 ink-scratch group-hover:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<button class="bg-surface-container-high border-2 border-outline px-12 py-4 font-label-caps text-label-caps text-primary hover:border-primary hover:bg-surface-container-highest transition-all btn-hover-shake">
+                        LOAD NEXT 20 TEAMS
+                    </button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-gutter py-8 max-w-container-max mx-auto gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">radio_button_checked</span>
+<span class="font-label-caps text-label-caps text-primary">STICK LEAGUE</span>
+</div>
+<div class="flex gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#">SEASON 01 NOW LIVE</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#">PRIVACY POLICY</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#">SUPPORT</a>
+</div>
+<span class="font-body-md text-on-surface-variant opacity-60">COPYRIGHT 2026 STICK LEAGUE</span>
+</div>
+</footer>
+</main>
+<!-- FAB (Contextual for Home/Leaderboard) -->
+<div class="fixed bottom-8 right-8 z-[60]">
+<button class="w-16 h-16 bg-primary text-on-primary rounded-none rough-border flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-transform group">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform">add</span>
+</button>
+</div>
+<script>
+        // Simple Micro-interaction for rows
+        document.querySelectorAll('.grid-cols-12').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                // Potential for more complex JS-based visual effects
+            });
+        });
+
+        // Add a parallax-like effect to the noise background
+        window.addEventListener('mousemove', (e) => {
+            const noise = document.querySelector('.noise-bg');
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 10;
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 10;
+            noise.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    </script>
+<div aria-hidden="true" data-snapdom-sandbox="true" id="snapdom-sandbox" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>STICK LEAGUE | Matches Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#131313",
+                    "tertiary-fixed": "#e5e2db",
+                    "on-secondary-fixed-variant": "#7d2b25",
+                    "surface-tint": "#ffb4ab",
+                    "on-tertiary-fixed": "#1c1c18",
+                    "primary": "#ffb4ab",
+                    "on-surface-variant": "#ddc0bd",
+                    "on-error": "#690005",
+                    "secondary-container": "#802d27",
+                    "on-primary": "#630e0d",
+                    "on-secondary": "#5f1511",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#ff9f94",
+                    "surface-dim": "#131313",
+                    "inverse-on-surface": "#313030",
+                    "tertiary-fixed-dim": "#c9c6c0",
+                    "outline": "#a58b88",
+                    "secondary-fixed-dim": "#ffb4ab",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#822621",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "on-background": "#e5e2e1",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "outline-variant": "#564240",
+                    "surface-container-lowest": "#0e0e0e",
+                    "background": "#131313",
+                    "secondary": "#ffb4ab",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-container": "#ff9a8f",
+                    "inverse-surface": "#e5e2e1",
+                    "primary-container": "#822621",
+                    "secondary-fixed": "#ffdad6",
+                    "tertiary": "#c9c6c0",
+                    "primary-fixed": "#ffdad6",
+                    "on-tertiary-container": "#b7b5af",
+                    "on-tertiary": "#31312c",
+                    "on-tertiary-fixed-variant": "#474742",
+                    "on-primary-fixed": "#410002",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed": "#410002",
+                    "surface-container": "#201f1f",
+                    "inverse-primary": "#a23d36",
+                    "surface-variant": "#353534",
+                    "tertiary-container": "#474742",
+                    "surface-bright": "#3a3939"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "margin-mobile": "16px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-md": ["Oswald"],
+                    "display-lg": ["Oswald"],
+                    "headline-lg-mobile": ["Oswald"],
+                    "headline-lg": ["Oswald"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                    "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .rough-ink-border {
+            position: relative;
+        }
+        .rough-ink-border::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 2px solid #822621;
+            mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' stroke='black' stroke-width='4' stroke-dasharray='5,3,8,2,4,6' fill='none'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 10;
+        }
+        .ink-scratch {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(130, 38, 33, 0.1) 5px, rgba(130, 38, 33, 0.1) 6px);
+        }
+        .paper-texture {
+            background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+            background-blend-mode: overlay;
+        }
+        .shiver-hover:hover {
+            animation: shiver 0.2s infinite;
+        }
+        @keyframes shiver {
+            0% { transform: translate(1px, 1px); }
+            25% { transform: translate(-1px, -1px); }
+            50% { transform: translate(1px, -1px); }
+            75% { transform: translate(-1px, 1px); }
+            100% { transform: translate(0, 0); }
+        }
+        .active-red-glow {
+            box-shadow: inset 0 0 20px rgba(130, 38, 33, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TOP APP BAR -->
+<header class="bg-surface text-primary font-headline-lg text-headline-lg tracking-tighter docked full-width top-0 sticky z-50 border-b border-secondary-container dark:border-secondary-container/50 h-20">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="radio_button_checked">radio_button_checked</span>
+<span class="font-headline-lg text-headline-lg text-primary tracking-tighter">STICK LEAGUE</span>
+</div>
+<nav class="hidden md:flex gap-8 h-full items-center"><a class="h-full flex items-center text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_78}}">HOME</a><a class="h-full flex items-center text-primary border-b-2 border-primary font-label-sm text-label-sm" href="{{DATA:SCREEN:SCREEN_63}}">MATCHES</a><a class="h-full flex items-center text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_42}}">TEAMS</a><a class="h-full flex items-center text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_64}}">PLAYERS</a><a class="h-full flex items-center text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_50}}">LEADERBOARD</a></nav>
+<a href="{{DATA:SCREEN:SCREEN_11}}" class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden block"><img class="w-full h-full object-cover" data-alt="A gritty close-up portrait of a competitive gamer in a dark, red-lit room. The aesthetic is industrial and prestige, with dark shadows and sharp red highlights on the facial contours. Minimalist digital elements overlap the face like a HUD interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-CyAcpMqFhkix_j4hspyU2vnuqtycB-jm7F2f7BSja_MzVIQQfEdOEh0mCg3LLOKXjjAmepI3sy4sCR0mChPXMCkcuCFx4D0VTJ6hNqCTODaw6P5hdzxro8UQlcwf-6NB6smtcMil6UbjMpbWrPuw5gSP42IyzUdYdgHKyXismSX3ize7RjjSrUP8gVNEskNNBvP0Pi5ptjVRWhllZ3irBMTRSB5_I_oor-bhqzh7N-uaJXjXFWKK-_XRrJHqoRjOARQBQBVVe3Q"></a>
+</div>
+</header>
+<div class="flex max-w-container-max mx-auto">
+<!-- NAVIGATION DRAWER (Sidebar) -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-80px)] py-8 sticky top-20 bg-surface-container-lowest border-r border-outline-variant w-80">
+<div class="px-6 mb-8">
+<h2 class="font-headline-md text-headline-md text-primary opacity-50">DASHBOARD</h2>
+</div>
+<nav class="flex flex-col gap-1"><a class="flex items-center gap-4 px-6 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_78}}"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">HOME</span></a><a class="flex items-center gap-4 px-6 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_21}}"><span class="material-symbols-outlined">dashboard</span><span class="font-label-sm text-label-sm">DASHBOARD</span></a><a class="flex items-center gap-4 px-6 py-4 bg-secondary-container text-on-secondary-container rounded-none border-l-4 border-primary transition-all duration-200" href="{{DATA:SCREEN:SCREEN_63}}"><span class="material-symbols-outlined">sports_kabaddi</span><span class="font-label-sm text-label-sm">MATCHES</span></a><a class="flex items-center gap-4 px-6 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_42}}"><span class="material-symbols-outlined">groups</span><span class="font-label-sm text-label-sm">TEAMS</span></a><a class="flex items-center gap-4 px-6 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_64}}"><span class="material-symbols-outlined">person_search</span><span class="font-label-sm text-label-sm">PLAYERS</span></a><a class="flex items-center gap-4 px-6 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_50}}"><span class="material-symbols-outlined">leaderboard</span><span class="font-label-sm text-label-sm">LEADERBOARD</span></a><a class="flex items-center gap-4 px-6 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_68}}"><span class="material-symbols-outlined">search</span><span class="font-label-sm text-label-sm">SEARCH</span></a><div class="h-px bg-outline-variant/30 mx-4 my-2"></div><a class="flex items-center gap-4 px-6 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_47}}"><span class="material-symbols-outlined">settings_applications</span><span class="font-label-sm text-label-sm">TOURNAMENT MANAGEMENT</span></a><a class="flex items-center gap-4 px-6 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_17}}"><span class="material-symbols-outlined">admin_panel_settings</span><span class="font-label-sm text-label-sm">ADMIN PANEL</span></a></nav>
+<div class="mt-auto px-6 pt-8 border-t border-outline-variant">
+<div class="bg-primary-container/10 p-4 rough-ink-border">
+<p class="font-label-sm text-label-sm text-primary mb-2">SEASON 01 PASS</p>
+<div class="w-full h-1 bg-surface-container-highest overflow-hidden">
+<div class="bg-primary h-full w-2/3"></div>
+</div>
+<p class="text-[10px] mt-2 opacity-50 font-mono">LVL 42 / 60</p>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT CANVAS -->
+<main class="flex-1 min-h-screen px-gutter py-8 bg-surface paper-texture relative overflow-hidden">
+<!-- Atmospheric Backdrop Shader -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+
+</div>
+<div class="relative z-10 max-w-5xl mx-auto">
+<!-- FEATURED LIVE MATCH -->
+<section class="mb-12">
+<div class="relative w-full aspect-video rough-ink-border overflow-hidden bg-surface-container-lowest group">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-[2000ms]" data-alt="A cinematic high-action esports match broadcast screen showing two futuristic teams clashing in a dark industrial arena. Intense red laser fire, grit, and digital static effects dominate the frame. The lighting is high-contrast, brutalist, and evokes a clandestine tournament atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMG4RpnbD8nwpoRtEVB0Y7oQROcs0Y8wStGxEr4KPN65UTbt79sLovcWcQU7H8Tw5pik2b4u2zXur98hxbTFM69AtNh_ylUAF49RR7J2sMVQ8nL-dTiMjPitjxBx3sqbVxvE6hBLDvMGBiWcjEoxlaMpXmxGLkilVspaM0Ouz0Cr4FP46WWKSlSq3MX3uLeKOu_GR5mna_s3shQrFzYqYI3SsZpJ40Bvi5QOpmcF7sI0ZYvVVuoYt26IXThr5l-ruOm9jODfBkq2w">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+</div>
+<!-- Overlay Details -->
+<div class="absolute inset-0 p-8 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="bg-primary text-on-primary px-3 py-1 font-label-sm text-label-sm flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-on-primary animate-pulse"></span>
+                                    LIVE NOW
+                                </div>
+<div class="flex gap-4">
+<span class="bg-surface-container-highest/80 backdrop-blur-md px-3 py-1 font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span>
+                                        12.4K VIEWERS
+                                    </span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="space-y-4">
+<h1 class="font-headline-lg text-headline-lg text-primary uppercase leading-tight max-w-xl">GRAND FINALS: VANGUARD vs SYNDICATE</h1>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-white/10 rounded-full rough-ink-border flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+</div>
+<span class="font-headline-md text-headline-md">12</span>
+</div>
+<span class="text-primary font-headline-lg">—</span>
+<div class="flex items-center gap-3">
+<span class="font-headline-md text-headline-md">09</span>
+<div class="w-12 h-12 bg-white/10 rounded-full rough-ink-border flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="shield">shield</span>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<button class="shiver-hover bg-primary-container text-on-primary-container px-8 py-3 font-headline-md text-headline-md flex items-center gap-3 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                                            WATCH BROADCAST
+                                        </button>
+</div>
+</div>
+<div class="hidden md:block">
+<div class="text-right">
+<p class="font-label-sm text-label-sm text-primary opacity-60">CURRENT MAP</p>
+<p class="font-headline-md text-headline-md text-on-surface">SECTOR 7</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FILTER TABS -->
+<div class="flex items-center justify-between mb-8 border-b border-outline-variant">
+<div class="flex gap-8">
+<button class="pb-4 font-label-sm text-label-sm text-primary border-b-2 border-primary">ALL MATCHES</button>
+<button class="pb-4 font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">LIVE</button>
+<button class="pb-4 font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">UPCOMING</button>
+<button class="pb-4 font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">RESULTS</button>
+</div>
+<div class="flex items-center gap-4 pb-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="search">search</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="filter_list">filter_list</span>
+</div>
+</div>
+<!-- MATCH LIST (GRID) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Match Card 1: Completed -->
+<div class="bg-surface-container-lowest rough-ink-border group p-6 hover:active-red-glow transition-all">
+<div class="flex justify-between items-center mb-6">
+<span class="text-[10px] font-mono opacity-50 uppercase tracking-widest">STK-001 | COMPLETED</span>
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-[10px]">DOCKLANDS</span>
+</div>
+<div class="flex items-center justify-between mb-8">
+<div class="text-center space-y-2">
+<div class="w-16 h-16 bg-surface p-2 rough-ink-border flex items-center justify-center mx-auto grayscale group-hover:grayscale-0 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="star">star</span>
+</div>
+<p class="font-label-sm text-label-sm">TITANS</p>
+</div>
+<div class="text-center">
+<span class="font-headline-lg text-headline-lg text-on-surface opacity-30">1</span>
+<span class="mx-4 text-primary opacity-20">:</span>
+<span class="font-headline-lg text-headline-lg text-primary">2</span>
+</div>
+<div class="text-center space-y-2">
+<div class="w-16 h-16 bg-surface p-2 rough-ink-border flex items-center justify-center mx-auto grayscale group-hover:grayscale-0 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<p class="font-label-sm text-label-sm">PHANTOM</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-container py-2 font-label-sm text-label-sm hover:bg-surface-variant transition-colors border border-outline-variant">MATCH REPLAY</button>
+<button class="flex-1 bg-surface-container py-2 font-label-sm text-label-sm hover:bg-surface-variant transition-colors border border-outline-variant">STATISTICS</button>
+</div>
+</div>
+<!-- Match Card 2: Upcoming -->
+<div class="bg-surface-container-lowest rough-ink-border group p-6 hover:active-red-glow transition-all">
+<div class="flex justify-between items-center mb-6">
+<span class="text-[10px] font-mono text-primary uppercase tracking-widest">STK-002 | TOMORROW @ 20:00</span>
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-[10px]">SECTOR 7</span>
+</div>
+<div class="flex items-center justify-between mb-8">
+<div class="text-center space-y-2">
+<div class="w-16 h-16 bg-surface p-2 rough-ink-border flex items-center justify-center mx-auto grayscale group-hover:grayscale-0 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="diamond">diamond</span>
+</div>
+<p class="font-label-sm text-label-sm">NOVA</p>
+</div>
+<div class="text-center px-4">
+<p class="font-headline-md text-headline-md text-primary opacity-50">VS</p>
+</div>
+<div class="text-center space-y-2">
+<div class="w-16 h-16 bg-surface p-2 rough-ink-border flex items-center justify-center mx-auto grayscale group-hover:grayscale-0 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="bolt">bolt</span>
+</div>
+<p class="font-label-sm text-label-sm">STRIKE</p>
+</div>
+</div>
+<button class="shiver-hover w-full bg-primary-container/20 text-primary border border-primary-container py-3 font-headline-md text-headline-md flex items-center justify-center gap-3 hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                            SET REMINDER
+                        </button>
+</div>
+<!-- Match Card 3: Scheduled -->
+<div class="bg-surface-container-lowest rough-ink-border group p-6 hover:active-red-glow transition-all">
+<div class="flex justify-between items-center mb-6">
+<span class="text-[10px] font-mono opacity-50 uppercase tracking-widest">STK-003 | SCHEDULED (2 DAYS)</span>
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-[10px]">CORE DEPOT</span>
+</div>
+<div class="flex items-center justify-between mb-8">
+<div class="text-center space-y-2">
+<div class="w-16 h-16 bg-surface p-2 rough-ink-border flex items-center justify-center mx-auto opacity-40">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="local_fire_department">local_fire_department</span>
+</div>
+<p class="font-label-sm text-label-sm">EMBER</p>
+</div>
+<div class="text-center px-4">
+<p class="font-headline-md text-headline-md text-primary opacity-20">VS</p>
+</div>
+<div class="text-center space-y-2">
+<div class="w-16 h-16 bg-surface p-2 rough-ink-border flex items-center justify-center mx-auto opacity-40">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="ac_unit">ac_unit</span>
+</div>
+<p class="font-label-sm text-label-sm">FROST</p>
+</div>
+</div>
+<button class="w-full bg-surface-container py-3 font-label-sm text-label-sm border border-outline-variant hover:bg-surface-variant">VIEW PRE-MATCH DATA</button>
+</div>
+<!-- Match Card 4: Upcoming -->
+<div class="bg-surface-container-lowest rough-ink-border group p-6 hover:active-red-glow transition-all">
+<div class="flex justify-between items-center mb-6">
+<span class="text-[10px] font-mono text-primary uppercase tracking-widest">STK-004 | TOMORROW @ 22:30</span>
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-[10px]">THE VOID</span>
+</div>
+<div class="flex items-center justify-between mb-8">
+<div class="text-center space-y-2">
+<div class="w-16 h-16 bg-surface p-2 rough-ink-border flex items-center justify-center mx-auto grayscale">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="skull">skull</span>
+</div>
+<p class="font-label-sm text-label-sm">REAPERS</p>
+</div>
+<div class="text-center px-4">
+<p class="font-headline-md text-headline-md text-primary opacity-50">VS</p>
+</div>
+<div class="text-center space-y-2">
+<div class="w-16 h-16 bg-surface p-2 rough-ink-border flex items-center justify-center mx-auto grayscale">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="psychology">psychology</span>
+</div>
+<p class="font-label-sm text-label-sm">MINDSET</p>
+</div>
+</div>
+<button class="shiver-hover w-full bg-primary-container/20 text-primary border border-primary-container py-3 font-headline-md text-headline-md flex items-center justify-center gap-3 hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                            SET REMINDER
+                        </button>
+</div>
+</div>
+<!-- Load More / Ink Separator -->
+<div class="mt-12 text-center py-12 relative overflow-hidden">
+<div class="absolute inset-x-0 top-1/2 h-px bg-outline-variant ink-scratch"></div>
+<button class="relative bg-surface px-8 font-label-sm text-label-sm text-primary hover:tracking-widest transition-all">SHOWING 4 OF 32 MATCHES — LOAD MORE</button>
+</div>
+</div>
+</main>
+</div>
+<!-- FOOTER -->
+<footer class="bg-surface-container-lowest text-primary font-label-sm text-label-sm w-full border-t border-outline-variant">
+<div class="flex justify-between items-center w-full px-gutter py-8 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-primary">STICK LEAGUE PRO</span>
+<span class="text-on-surface-variant opacity-30">|</span>
+<p class="text-on-surface-variant">COPYRIGHT 2026 STICK LEAGUE</p>
+</div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-primary underline underline-offset-4 transition-all duration-300" href="#">SEASON 01 NOW LIVE</a>
+<a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">PRIVACY</a>
+<a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">TERMS</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Jitter effect on buttons
+        document.querySelectorAll('.shiver-hover').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.95)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple tab switching logic for UI feel
+        const tabs = document.querySelectorAll('.filter-tabs button');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('border-b-2', 'border-primary', 'text-primary'));
+                tabs.forEach(t => t.classList.add('text-on-surface-variant'));
+                tab.classList.remove('text-on-surface-variant');
+                tab.classList.add('border-b-2', 'border-primary', 'text-primary');
+            });
+        });
+    </script>
+
+
+
+
+
+
+</body></html>

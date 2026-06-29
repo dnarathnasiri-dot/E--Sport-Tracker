@@ -1,0 +1,430 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>STICK LEAGUE | Tournament Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        :root {
+            --rough-ink-border: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 2 L10 1 L25 3 L40 1 L60 2 L80 1 L100 3 L98 25 L101 50 L99 75 L100 100 L75 98 L50 101 L25 99 L0 100 L2 75 L-1 50 L2 25 Z' stroke='%23822621' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+        }
+
+        .rough-border {
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .rough-border::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 4px solid transparent;
+            border-image-source: var(--rough-ink-border);
+            border-image-slice: 10;
+            pointer-events: none;
+        }
+
+        .ink-scratch-separator {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #822621 50%, transparent 100%);
+            mask-image: url("data:image/svg+xml,%3Csvg width='200' height='2' viewBox='0 0 200 2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 1 L20 0 L40 2 L60 0 L80 1 L100 0 L120 2 L140 0 L160 1 L180 0 L200 2' stroke='black' fill='none'/%3E%3C/svg%3E");
+        }
+
+        .noise-overlay {
+            background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+            opacity: 0.05;
+        }
+
+        .button-shake:hover {
+            animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+            40%, 60% { transform: translate3d(2px, 0, 0); }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #822621; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-error": "#690005",
+                        "surface-dim": "#131313",
+                        "secondary-container": "#802d27",
+                        "on-secondary": "#5f1511",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "secondary-fixed": "#ffdad6",
+                        "primary": "#ffb4ab",
+                        "on-background": "#e5e2e1",
+                        "on-primary-container": "#ff9a8f",
+                        "primary-container": "#822621",
+                        "inverse-on-surface": "#313030",
+                        "outline": "#a58b88",
+                        "secondary-fixed-dim": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-tint": "#ffb4ab",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-container": "#b7b5af",
+                        "surface-bright": "#3a3939",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed-variant": "#822621",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-fixed": "#410002",
+                        "on-surface-variant": "#ddc0bd",
+                        "on-secondary-fixed": "#410002",
+                        "inverse-primary": "#a23d36",
+                        "on-primary": "#630e0d",
+                        "surface-container": "#201f1f",
+                        "tertiary-container": "#474742",
+                        "secondary": "#ffb4ab",
+                        "on-tertiary": "#31312c",
+                        "surface-variant": "#353534",
+                        "surface": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#c9c6c0",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#e5e2db",
+                        "outline-variant": "#564240",
+                        "on-secondary-container": "#ff9f94",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "on-secondary-fixed-variant": "#7d2b25",
+                        "surface-container-highest": "#353534"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Oswald"],
+                        "display-lg": ["Oswald"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Oswald"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Oswald"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen overflow-x-hidden">
+<!-- NAVIGATION DRAWER -->
+<aside class="fixed inset-y-0 left-0 w-80 bg-surface-container border-r border-outline-variant flex flex-col h-full py-8 z-50">
+<div class="px-8 mb-12">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter leading-tight">STICK LEAGUE PRO</h1>
+<div class="ink-scratch-separator mt-4 w-full"></div>
+</div>
+<nav class="flex-1 space-y-2 px-4"><a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="{{DATA:SCREEN:SCREEN_78}}"><span class="material-symbols-outlined text-2xl">home</span><span class="font-label-caps text-label-caps">HOME</span></a><a class="flex items-center gap-4 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-none border-l-4 border-primary transition-all duration-200 scale-[0.98] group" href="{{DATA:SCREEN:SCREEN_47}}"><span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span><span class="font-label-caps text-label-caps">TOURNAMENT&nbsp;</span></a><a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="{{DATA:SCREEN:SCREEN_42}}"><span class="material-symbols-outlined text-2xl">groups</span><span class="font-label-caps text-label-caps">TEAMS</span></a><a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="{{DATA:SCREEN:SCREEN_64}}"><span class="material-symbols-outlined text-2xl">person_search</span><span class="font-label-caps text-label-caps">PLAYERS</span></a><a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="{{DATA:SCREEN:SCREEN_50}}"><span class="material-symbols-outlined text-2xl">leaderboard</span><span class="font-label-caps text-label-caps">LEADERBOARD</span></a><a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="{{DATA:SCREEN:SCREEN_68}}"><span class="material-symbols-outlined text-2xl">search</span><span class="font-label-caps text-label-caps">SEARCH</span></a><div class="pt-8 mt-8 border-t border-outline-variant/30"><a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="{{DATA:SCREEN:SCREEN_17}}"><span class="material-symbols-outlined text-2xl">admin_panel_settings</span><span class="font-label-caps text-label-caps">ADMIN PANEL</span></a></div></nav>
+<div class="px-8 mt-auto">
+<div class="p-4 bg-surface-container-low border border-outline-variant/50 relative overflow-hidden">
+<div class="noise-overlay absolute inset-0"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">SERVER STATUS</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-[10px] text-primary">OPERATIONAL : 14MS</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT CANVAS -->
+<main class="ml-80 min-h-screen relative flex flex-col">
+<!-- TOP APP BAR -->
+<header class="sticky top-0 z-40 bg-surface h-20 border-b border-secondary-container/50">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">radio_button_checked</span>
+<h2 class="text-headline-lg font-headline-lg text-primary tracking-tighter uppercase">STICK LEAGUE</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<div class="flex items-center gap-4 pl-6 border-l border-outline-variant">
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface leading-none">DRAVEN_01</p>
+<p class="font-label-sm text-label-sm text-primary">LEAGUE ADMIN</p>
+</div>
+<a href="{{DATA:SCREEN:SCREEN_11}}" class="w-10 h-10 bg-primary-container border-2 border-primary overflow-hidden block"><img class="w-full h-full object-cover grayscale contrast-125" data-alt="A gritty, high-contrast portrait of a competitive gamer wearing high-end tactical headphones. The lighting is dramatic, coming from a single red source on the side, casting deep shadows across the face. The background is a blurred industrial environment with subtle ink splatters and a dark, charcoal texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyyiJdgtZFtPWJXHNBD6ocjvyNCQRj97Mj2Y2sYjxT_tcEiiSyGnJcvOZcNkwAUKiS5knyUUZEPlpY3IjZtsgiMUpe1tg5s09czmgHzBMX7a5zVc2DvlhBK90YvYu9QLzxNoT5DuVeio6DZBsG64ex34o1Zqd2oPGR6r7RWCM46raAvzJbqHxm9bX1uer3EDNc8QuR3DKhgPNCWCjtD9G4ZV_IN3v0ANFf8mRsqCadbMhhdnEuTDz3QaHFw9u2_Mdbm4r3RWHBFe0"></a>
+</div>
+</div>
+</div>
+</header>
+<!-- DASHBOARD BODY -->
+<div class="flex-1 p-gutter max-w-container-max mx-auto w-full">
+<!-- STATS GRID -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<!-- Active Tournaments -->
+<div class="rough-border bg-surface-container-lowest p-6 group cursor-default">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-4xl">emoji_events</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">ACTIVE NOW</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">04</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">TOURNAMENTS LIVE</p>
+<div class="mt-4 h-1 bg-surface-variant w-full relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 bg-primary w-2/3"></div>
+</div>
+</div>
+<!-- Prize Pool -->
+<div class="rough-border bg-surface-container-lowest p-6 group cursor-default">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-4xl">payments</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">LEAGUE POT</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">$25,400.00</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">TOTAL PRIZE POOL</p>
+<div class="mt-4 h-1 bg-surface-variant w-full relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 bg-primary w-full opacity-50"></div>
+</div>
+</div>
+<!-- Teams -->
+<div class="rough-border bg-surface-container-lowest p-6 group cursor-default">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-4xl">groups</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">REGISTERED</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">128</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">VERIFIED TEAMS</p>
+<div class="mt-4 h-1 bg-surface-variant w-full relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 bg-primary w-1/4"></div>
+</div>
+</div>
+</div>
+<!-- LIVE EVENTS TABLE -->
+<section class="mb-12">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-tight">LIVE EVENTS</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">ACTIVE TOURNAMENT MONITORING</p>
+</div>
+<a href="{{DATA:SCREEN:SCREEN_54}}" class="bg-primary-container text-on-primary-container px-6 py-2 font-label-caps text-label-caps flex items-center gap-2 rough-border button-shake transition-transform active:scale-95"><span class="material-symbols-outlined text-sm">add</span>CREATE TOURNAMENT</a>
+</div>
+<div class="bg-surface-container border border-outline-variant relative overflow-hidden">
+<div class="noise-overlay absolute inset-0"></div>
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-high border-b border-outline-variant">
+<tr>
+<th class="p-6 font-label-caps text-label-caps text-primary">NAME</th>
+<th class="p-6 font-label-caps text-label-caps text-primary">MODE</th>
+<th class="p-6 font-label-caps text-label-caps text-primary">TEAMS</th>
+<th class="p-6 font-label-caps text-label-caps text-primary">STATUS</th>
+<th class="p-6 font-label-caps text-label-caps text-primary text-right">ACTIONS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-variant/50 transition-colors">
+<td class="p-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-black border border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="A stylized, minimalist ink-drawn logo for a 'Shadow Protocol' tournament. Features a sharp, geometric skull with dripping ink effects and aggressive red lines. The style is raw and brutalist, with visible felt-tip pen strokes and high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABVb0-s2YT8_Sn3yR1iArSu8tO6O6IFIr3Gvrd3SFcQP5soSnX-bO0GACiVY1-h5hdC89XbOKu1BEyK8r3ZCARPajoppK1UAX4pYZWOqiE-ciLC1ChKmAFpnGGCPfKK6KKNkQInfOlHfyH3ZMQI6WXJbobXXsgGtEHikmoO-PTiEEEV8QPayAyJgGvw9dklQcyUeziM3XLIdm0pnCE_j8CByOnXMbuGPUWFiiFWCpS3wkIxZ_Xr3nRO7ftrVP9n7eES2_QhnWpUjc">
+</div>
+<div>
+<p class="font-headline-md text-[18px] text-on-surface uppercase leading-none">SHADOW PROTOCOL</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ID: SL-2026-A1</p>
+</div>
+</div>
+</td>
+<td class="p-6">
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-container-highest border border-outline-variant">5V5 BATTLE ROYALE</span>
+</td>
+<td class="p-6">
+<div class="flex -space-x-3">
+<div class="w-8 h-8 rounded-none border border-primary bg-black"></div>
+<div class="w-8 h-8 rounded-none border border-primary bg-black"></div>
+<div class="w-8 h-8 rounded-none border border-primary bg-black"></div>
+<div class="w-8 h-8 rounded-none border border-primary bg-surface-container-highest flex items-center justify-center text-[10px] font-bold">+29</div>
+</div>
+</td>
+<td class="p-6">
+<div class="flex items-center gap-2 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps">SEMIS ROUND 2</span>
+</div>
+</td>
+<td class="p-6 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-secondary-container transition-colors material-symbols-outlined text-on-surface-variant hover:text-on-secondary-container">edit</button>
+<button class="p-2 hover:bg-error-container transition-colors material-symbols-outlined text-on-surface-variant hover:text-on-error-container">delete</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-variant/50 transition-colors">
+<td class="p-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-black border border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="A dark, ink-smudged emblem for an 'Underground Cup' gaming event. The design shows a hand holding a stick-figure trophy, executed in a rough, hand-drawn charcoal style with red blood-drop accents. The aesthetic is dark, industrial, and high-stakes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSk5GpMB0RfStDXa2cTPmJIZpV5p6hQh9F0QX71E_t_IcFc1sX4EzePxVcabx_F6FuAOm4NQpgZ-CMT7o7D59td_5dAJeVOtVyss--YZSpraclYl0KNNdmGRL5KStph_6Y9V6WjGJL99o57No3LfBORaYeWyYKFElO0NFc6NZZ5ShPhBW_aVAvTvQxjJSb-gWTWleb3kxabKSY0ApKjqJMxuC_1wtiglBMRAqlITbqgRIDrEU_4R9ImMUGLZOuaeOwYfYyk1p9VY8">
+</div>
+<div>
+<p class="font-headline-md text-[18px] text-on-surface uppercase leading-none">UNDERGROUND CUP</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ID: SL-2026-B4</p>
+</div>
+</div>
+</td>
+<td class="p-6">
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-container-highest border border-outline-variant">1V1 DUELS</span>
+</td>
+<td class="p-6">
+<p class="font-label-caps text-label-caps text-on-surface">64 / 64</p>
+</td>
+<td class="p-6">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-label-caps text-label-caps">STARTING IN 12H</span>
+</div>
+</td>
+<td class="p-6 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-secondary-container transition-colors material-symbols-outlined text-on-surface-variant hover:text-on-secondary-container">edit</button>
+<button class="p-2 hover:bg-error-container transition-colors material-symbols-outlined text-on-surface-variant hover:text-on-error-container">delete</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-variant/50 transition-colors">
+<td class="p-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-black border border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="A brutalist logo for 'Crimson League' featuring a jagged, hand-drawn mountain silhouette made of thick ink strokes. The peak is glowing with a deep red light. The entire composition has a gritty paper texture and looks like it was stamped onto the screen with wet ink." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLx8NGkr01xnU4T8pTi07jtXwTn7290WJNhmB6X0-MqWxGjnmdm4xDWXSMOmPLm1hKIFKyNQCZjguPVSbqqHWiAWEtMm5k9QAo7RnL31eyZATklDY8Ix7gGzgqvduFs0u1oItSnAMQqZJ6gJQfTQooEpNUlXp2KOpXaq8NRiZ3CBFAcdguWdUnHZieFveEVW9FTHKBG_WGwr6DWadjIq8p2QzD_eHP3mCJ3OdiZj-JbLswAdUdgSyJ-xNDiRD0pVL6x_YVu6Hqak4">
+</div>
+<div>
+<p class="font-headline-md text-[18px] text-on-surface uppercase leading-none">CRIMSON LEAGUE</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ID: SL-2026-C2</p>
+</div>
+</div>
+</td>
+<td class="p-6">
+<span class="font-label-sm text-label-sm px-2 py-1 bg-surface-container-highest border border-outline-variant">KING OF HILL</span>
+</td>
+<td class="p-6">
+<p class="font-label-caps text-label-caps text-on-surface">16 / 16</p>
+</td>
+<td class="p-6">
+<div class="flex items-center gap-2 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps">FINAL MATCH</span>
+</div>
+</td>
+<td class="p-6 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-secondary-container transition-colors material-symbols-outlined text-on-surface-variant hover:text-on-secondary-container">edit</button>
+<button class="p-2 hover:bg-error-container transition-colors material-symbols-outlined text-on-surface-variant hover:text-on-error-container">delete</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- ASYMMETRIC ANALYTICS SECTION -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-8 rough-border bg-surface-container-lowest p-8 relative overflow-hidden h-[400px]">
+<div class="absolute inset-0 noise-overlay pointer-events-none"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">ENGAGEMENT TRENDS</h2>
+<div class="flex gap-4">
+<span class="flex items-center gap-2 font-label-sm text-label-sm"><span class="w-2 h-2 bg-primary"></span> VIEWS</span>
+<span class="flex items-center gap-2 font-label-sm text-label-sm"><span class="w-2 h-2 bg-on-surface-variant"></span> BETS</span>
+</div>
+</div>
+<!-- Placeholder for a stylized chart -->
+<div class="w-full h-64 flex items-end gap-2 px-4">
+<div class="w-full bg-primary-container/20 h-24 border-t border-primary"></div>
+<div class="w-full bg-primary-container/20 h-48 border-t border-primary"></div>
+<div class="w-full bg-primary-container/20 h-32 border-t border-primary"></div>
+<div class="w-full bg-primary-container/20 h-56 border-t border-primary"></div>
+<div class="w-full bg-primary-container/20 h-40 border-t border-primary"></div>
+<div class="w-full bg-primary-container/20 h-64 border-t border-primary"></div>
+</div>
+</div>
+<div class="absolute bottom-4 right-8 font-display-lg text-display-lg opacity-5 select-none">DATA_FEED_V4</div>
+</div>
+<div class="lg:col-span-4 bg-surface-container p-8 space-y-6">
+<h2 class="font-headline-md text-headline-md text-primary uppercase">RECENT ALERTS</h2>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container-high border-l-4 border-primary">
+<p class="font-label-sm text-label-sm text-primary mb-1">SECURITY BREACH ATTEMPT</p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Unauthorized tournament modification request blocked for ID: SL-2026-A1.</p>
+</div>
+<div class="p-4 bg-surface-container-high border-l-4 border-on-surface-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">SYSTEM MAINTENANCE</p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Scheduled database optimization starting in 2 hours.</p>
+</div>
+<div class="p-4 bg-surface-container-high border-l-4 border-secondary">
+<p class="font-label-sm text-label-sm text-secondary mb-1">NEW TEAM VERIFIED</p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Team 'V0ID_WALKERS' has completed verification.</p>
+</div>
+</div>
+<button class="w-full border border-outline py-3 font-label-caps text-label-caps hover:bg-surface-variant transition-colors uppercase">VIEW ALL LOGS</button>
+</div>
+</div>
+</div>
+<!-- FOOTER -->
+<footer class="mt-auto border-t border-outline-variant bg-surface-container-lowest">
+<div class="flex justify-between items-center w-full px-gutter py-8 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-primary text-label-caps">STICK LEAGUE ADMIN TERMINAL</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">COPYRIGHT 2026 STICK LEAGUE</span>
+</div>
+<div class="flex gap-8">
+<a class="font-label-caps text-label-caps text-primary underline underline-offset-4 hover:text-primary transition-all duration-300" href="#">SEASON 01 NOW LIVE</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#">SYSTEM LOGS</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#">API DOCS</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- FLOATING ACTION DECORATION -->
+<div class="fixed bottom-12 right-12 flex flex-col gap-4 z-50 pointer-events-none opacity-20 lg:opacity-100">
+<div class="bg-primary/10 border border-primary p-2 backdrop-blur-sm pointer-events-auto">
+<div class="font-label-sm text-[10px] text-primary">ENCRYPTION: ACTIVE</div>
+</div>
+</div>
+<script>
+        // Micro-interactions for table rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mousedown', () => {
+                row.style.transform = 'scale(0.995)';
+            });
+            row.addEventListener('mouseup', () => {
+                row.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+</body></html>

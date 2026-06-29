@@ -1,0 +1,469 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 1280px; height: 1673px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>STICK LEAGUE | PLAYERS HUB</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @layer base {
+            body {
+                @apply bg-surface-container-lowest text-on-surface selection:bg-primary/30;
+            }
+        }
+
+        .rough-border {
+            position: relative;
+        }
+        .rough-border::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 2px solid currentColor;
+            pointer-events: none;
+            mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 2L10 5L20 2L30 6L40 3L50 7L60 4L70 8L80 5L90 9L100 6' stroke='black' stroke-width='4'/%3E%3C/svg%3E");
+            mask-repeat: repeat;
+        }
+
+        .ink-smudge {
+            filter: blur(12px);
+            opacity: 0.15;
+            background: radial-gradient(circle, #822621 0%, transparent 70%);
+        }
+
+        .paper-texture {
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+            background-blend-mode: overlay;
+        }
+
+        .hover-shake:hover {
+            animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+            40%, 60% { transform: translate3d(2px, 0, 0); }
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#131313",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-secondary-fixed-variant": "#7d2b25",
+                        "surface-tint": "#ffb4ab",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "primary": "#ffb4ab",
+                        "on-surface-variant": "#ddc0bd",
+                        "on-error": "#690005",
+                        "secondary-container": "#802d27",
+                        "on-primary": "#630e0d",
+                        "on-secondary": "#5f1511",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#ff9f94",
+                        "surface-dim": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "outline": "#a58b88",
+                        "secondary-fixed-dim": "#ffb4ab",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#822621",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "outline-variant": "#564240",
+                        "surface-container-lowest": "#0e0e0e",
+                        "background": "#131313",
+                        "secondary": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-container": "#ff9a8f",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-container": "#822621",
+                        "secondary-fixed": "#ffdad6",
+                        "tertiary": "#c9c6c0",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary-container": "#b7b5af",
+                        "on-tertiary": "#31312c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-primary-fixed": "#410002",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#410002",
+                        "surface-container": "#201f1f",
+                        "inverse-primary": "#a23d36",
+                        "surface-variant": "#353534",
+                        "tertiary-container": "#474742",
+                        "surface-bright": "#3a3939"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Oswald"],
+                        "display-lg": ["Oswald"],
+                        "headline-lg-mobile": ["Oswald"],
+                        "headline-lg": ["Oswald"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Oswald"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface-container-lowest font-body-md text-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary docked full-width top-0 sticky border-b border-secondary-container dark:border-secondary-container/50 z-50">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl" data-icon="radio_button_checked">radio_button_checked</span>
+<span class="text-headline-lg font-headline-lg text-primary dark:text-primary tracking-tighter">STICK LEAGUE</span>
+</div>
+<nav class="hidden md:flex gap-8"></nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-2xl hover:text-primary transition-colors">search</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up profile photo of a gritty elite gamer wearing a dark hooded tactical jacket, red backlight casting a sinister glow on their face in a dark concrete industrial room, high contrast lighting and sharp ink-like shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuKfV5sT6kupWbWL-rQ2vY30YVwd9xkWGloXaDYsbQY9xJTsjibUrzG1FV_H6x5ymKNSBhrKpu5LiTu1ihlXatuNtldW5v2moTFt6TxOfahMd43-zdJ8V8LF0svnuKajC0FRAyzdBOmjtzLjVvvBKJ7UKfOPZQ3HFrA1jWgTZ7bI6KFEtKcyzJss-0CHvA6Zxr9DSGZESBuRbd4-uSuHpDf8efvn3kp45xvZCxyrawupf_H2i2I78JlAtnirb_TPe-DpY10_8se44">
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- Sidebar Drawer -->
+<aside class="hidden lg:flex flex-col h-screen sticky top-20 bg-surface-container dark:bg-surface-container fixed inset-y-0 left-0 w-80 border-r border-outline-variant py-8 z-40">
+<div class="px-8 mb-12">
+<h2 class="font-headline-lg text-headline-lg text-primary uppercase">STICK LEAGUE PRO</h2>
+<div class="h-1 w-12 bg-primary mt-2"></div>
+</div>
+<nav class="flex flex-col"><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-caps text-label-caps uppercase" href="{{DATA:SCREEN:SCREEN_78}}"><span class="material-symbols-outlined">home</span> HOME</a><a class="flex items-center gap-4 px-8 py-4 bg-secondary-container text-on-secondary-container rounded-none border-l-4 border-primary font-label-caps text-label-caps uppercase" href="{{DATA:SCREEN:SCREEN_64}}"><span class="material-symbols-outlined">person_search</span> PLAYERS</a><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-caps text-label-caps uppercase" href="{{DATA:SCREEN:SCREEN_42}}"><span class="material-symbols-outlined">groups</span> TEAMS</a><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-caps text-label-caps uppercase" href="{{DATA:SCREEN:SCREEN_50}}"><span class="material-symbols-outlined">leaderboard</span> LEADERBOARD</a><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-caps text-label-caps uppercase" href="{{DATA:SCREEN:SCREEN_47}}"><span class="material-symbols-outlined">settings_applications</span> TOURNAMENT&nbsp;</a><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-caps text-label-caps uppercase" href="{{DATA:SCREEN:SCREEN_68}}"><span class="material-symbols-outlined">search</span> SEARCH</a><div class="mt-auto px-8 pt-8 border-t border-outline-variant/30"><a class="flex items-center gap-4 py-4 text-on-surface hover:text-primary transition-all duration-200 font-label-caps text-label-caps uppercase" href="{{DATA:SCREEN:SCREEN_17}}"><span class="material-symbols-outlined">admin_panel_settings</span> ADMIN PANEL</a></div></nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-full overflow-hidden">
+<!-- Hero Stats Section -->
+<section class="relative bg-surface px-margin-mobile md:px-margin-desktop py-12 border-b border-outline-variant/50">
+
+<div class="relative z-10 max-w-container-max mx-auto">
+<div class="mb-12">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Global Directory</span>
+<h1 class="font-display-lg text-display-lg text-on-surface uppercase leading-none mt-2">PLAYERS HUB</h1>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-low border-l-4 border-primary p-6 relative group hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Enlisted</span>
+<span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+</div>
+<div class="text-4xl font-headline-lg text-on-surface">1,248</div>
+<div class="ink-smudge absolute -right-4 -bottom-4 w-24 h-24"></div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-low border-l-4 border-primary p-6 relative group hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Avg Win Rate</span>
+<span class="material-symbols-outlined text-primary" data-icon="query_stats">query_stats</span>
+</div>
+<div class="text-4xl font-headline-lg text-on-surface">58.2%</div>
+<div class="ink-smudge absolute -right-4 -bottom-4 w-24 h-24"></div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container-low border-l-4 border-primary p-6 relative group hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Elite Captains</span>
+<span class="material-symbols-outlined text-primary" data-icon="military_tech">military_tech</span>
+</div>
+<div class="text-4xl font-headline-lg text-on-surface">42</div>
+<div class="ink-smudge absolute -right-4 -bottom-4 w-24 h-24"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Filters & Player Grid -->
+<section class="px-margin-mobile md:px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-8">
+<div class="flex gap-4">
+<button class="px-6 py-2 bg-primary text-on-primary-fixed font-label-caps text-label-caps uppercase hover:scale-105 transition-transform" style="transform: scale(1);">TOP RATED</button>
+<button class="px-6 py-2 border border-outline-variant text-on-surface-variant font-label-caps text-label-caps uppercase hover:bg-surface-container-high transition-colors">RECENTLY ACTIVE</button>
+</div>
+<div class="w-full md:w-96 relative">
+<input class="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-label-sm placeholder:text-on-surface-variant/30" placeholder="SEARCH OPERATOR_ID" type="text">
+<span class="material-symbols-outlined absolute right-2 top-2 text-on-surface-variant" data-icon="search">search</span>
+</div>
+</div>
+<!-- Responsive Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter">
+<!-- Player Card 1: Viper_Strikes -->
+<article class="bg-surface-container border border-outline-variant p-8 relative overflow-hidden group hover:border-primary transition-all duration-300">
+<div class="flex items-start justify-between mb-8">
+<div class="relative">
+<div class="w-24 h-24 border-2 border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="Digital portrait of a gamer known as Viper_Strikes, wearing a high-tech tactical mask with green glowing eye sensors, set against a dark industrial alleyway with rain effects and green neon highlights, brutalist style with ink texture overlays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_tA6THsonyakcWPznBvouhk95f5oYb-SlQwBk29FZguFdFIGWXLAoqvE6snWwFkN9YTc_CC8nu43GQjtlgvS-iLiFyYyb3du0xEisUOUsYmS9IA7WFu0A88f2zMVa47zc_LTnojIiUQoymTVib50_7ePMvRX52pqpNHslS2nhs93CbIQM923Km1NSMnnUWqo1ceWttkeDDZCuq1LnvfN3PRXR5PKap0rAI7HHACuuGOozYOSiy91RIR4xwTTa07ja6DaSPhgwNeM">
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary text-[10px] px-2 py-0.5 font-bold uppercase">RANK 01</div>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface uppercase mb-1">VIPER_STRIKES</div>
+<div class="font-label-sm text-label-sm text-primary uppercase">ELITE OPERATOR</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Win Rate</div>
+<div class="text-xl font-headline-md text-on-surface">72.4%</div>
+</div>
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Kill/Death</div>
+<div class="text-xl font-headline-md text-on-surface">3.8</div>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary font-headline-md text-headline-md uppercase hover:bg-primary hover:text-on-primary-fixed transition-all duration-200 flex items-center justify-center gap-3 hover-shake">
+<span class="">VIEW DOSSIER</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Aesthetic scratches -->
+<div class="absolute top-0 right-0 w-32 h-32 opacity-10 pointer-events-none transform translate-x-12 -translate-y-12">
+<svg class="w-full h-full stroke-primary fill-none" viewBox="0 0 100 100">
+<path d="M0,0 L100,100 M10,0 L110,100 M-10,0 L90,100" stroke-width="2"></path>
+</svg>
+</div>
+</article>
+<!-- Player Card 2: Null_Pointer -->
+<article class="bg-surface-container border border-outline-variant p-8 relative overflow-hidden group hover:border-primary transition-all duration-300">
+<div class="flex items-start justify-between mb-8">
+<div class="relative">
+<div class="w-24 h-24 border-2 border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="Cinematic digital painting of Null_Pointer, a sleek cybernetic character with a mirrored visor reflecting a red digital code, background is a dark server room with flickering red lights and floating data particles, gritty ink-stained aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbGxX0QhLF32rgfNxuq8eAdYZ6hqFzoNIEp8bZhz9VtnvhFHozgo2DbeVCctmnjr_rcuSWNZYTO021qsBafxBKvLCpG8N5tMOnRf-6wY2Hwg1DVRKkXmnPQ9yF1W4p1WeAURls0x9ltFI_ifuIl28NgegH1DyE4xYSk5vXLJeRBd4byN95GPPlALbXEgw8GEw2h7AeqXvFhE9dDP_DiAqN2SujnK_vIDYGBQ2g6eodevWP8WHL5sejpN5n-lAehmiWsw_ZyvD9gh4">
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary text-[10px] px-2 py-0.5 font-bold uppercase">RANK 04</div>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface uppercase mb-1">NULL_POINTER</div>
+<div class="font-label-sm text-label-sm text-primary uppercase">CODE BREAKER</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Win Rate</div>
+<div class="text-xl font-headline-md text-on-surface">65.8%</div>
+</div>
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Kill/Death</div>
+<div class="text-xl font-headline-md text-on-surface">2.1</div>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary font-headline-md text-headline-md uppercase hover:bg-primary hover:text-on-primary-fixed transition-all duration-200 flex items-center justify-center gap-3 hover-shake">
+<span class="">VIEW DOSSIER</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</article>
+<!-- Player Card 3: Revenant_X -->
+<article class="bg-surface-container border border-outline-variant p-8 relative overflow-hidden group hover:border-primary transition-all duration-300">
+<div class="flex items-start justify-between mb-8">
+<div class="relative">
+<div class="w-24 h-24 border-2 border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="Aggressive character portrait of Revenant_X, a warrior wearing charred armor with glowing embers in the cracks, background is a battlefield with heavy smoke and red fire glow, dark brutalist art style with charcoal-like texture strokes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuActhOweL7mwGE46ZEer5x5GCjE_dosC5f4UteQS1ItZp-K632PpLU7CisWnod0l8xDCY0G2nHGjvkGfj-uKgQrBis4BeEgLul5zs9XO_1Gej09yqUMn96xpW4ojCofDhp0RXTQjBoq0Y97GtybDWxj5De7wQfnk2jZ60daQ0iT2nfcMWJ-hNMYMw7x7AmGGbD2x2xwBDXvKMdUbD37Qc0xUAal4teg1XAn3RcWR61ePJ0-m5ytj-UK8neVVMfuCjtEtmTD6Wz70pE">
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary text-[10px] px-2 py-0.5 font-bold uppercase">RANK 09</div>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface uppercase mb-1">REVENANT_X</div>
+<div class="font-label-sm text-label-sm text-primary uppercase">GHOST LEAD</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Win Rate</div>
+<div class="text-xl font-headline-md text-on-surface">61.2%</div>
+</div>
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Kill/Death</div>
+<div class="text-xl font-headline-md text-on-surface">2.9</div>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary font-headline-md text-headline-md uppercase hover:bg-primary hover:text-on-primary-fixed transition-all duration-200 flex items-center justify-center gap-3 hover-shake">
+<span class="">VIEW DOSSIER</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</article>
+<!-- Player Card 4: Shadow_Reaper -->
+<article class="bg-surface-container border border-outline-variant p-8 relative overflow-hidden group hover:border-primary transition-all duration-300">
+<div class="flex items-start justify-between mb-8">
+<div class="relative">
+<div class="w-24 h-24 border-2 border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="Portrait of Shadow_Reaper, a mysterious figure shrouded in tattered black fabric, only bright red eyes visible through the gloom, dark gothic minimalism, industrial ruins background with heavy ink splatters." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSWl0wlRQM4uIz9aFh5fa-zlDB6AM8uXfnDp95ja89-N0snzywpn4WcM3hhwnZ4z7bDPbhPysp-qisuzIkV2rug4qajD5-DkiTPpojcwdwP7g3L2vb9rprEDB5MSjY8i1c6n-snVmxBM5ZjdAq2ER6_x7TnB55D8wPO-rmQKMDjB8y9D18ablj3gFyTVbFuwnHSHglRd-9WvvAbEmrXqV9aE-gMisFYEVMWC8xX9JkepnFxf-ygXR01spmhLkwaIg_1KiLIlzqc-Q">
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary text-[10px] px-2 py-0.5 font-bold uppercase">RANK 15</div>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface uppercase mb-1">SHADOW_REAPER</div>
+<div class="font-label-sm text-label-sm text-primary uppercase">INFILTRATOR</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Win Rate</div>
+<div class="text-xl font-headline-md text-on-surface">59.5%</div>
+</div>
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Kill/Death</div>
+<div class="text-xl font-headline-md text-on-surface">1.8</div>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary font-headline-md text-headline-md uppercase hover:bg-primary hover:text-on-primary-fixed transition-all duration-200 flex items-center justify-center gap-3 hover-shake">
+<span class="">VIEW DOSSIER</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</article>
+<!-- Player Card 5: Glitch_Kween -->
+<article class="bg-surface-container border border-outline-variant p-8 relative overflow-hidden group hover:border-primary transition-all duration-300">
+<div class="flex items-start justify-between mb-8">
+<div class="relative">
+<div class="w-24 h-24 border-2 border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="Dynamic portrait of Glitch_Kween, featuring chromatic aberration and glitch effects on a character with neon pink hair and tactical headgear, background is a distorted digital void, heavy contrast and ink pen textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHOVk0JsDvSi6z_CgpiJrcbJtkNea8jC6vW0Z82LiWz55XkWGS4_6cx-rLeHw5lr91lPVULaRuxVol6FqUCSMYGoTl_o_FvQT1Q-MULaB8EJLvDQu4V8gAoq4w8pkfaSicUBKA8w4ODFCmFKkWtzLMQJ8ZuWwJdoksaICUxBwno51Qg8nJluhsWagOY_wyz8zqXbiVKrLzFnUaopSy0aKgBhd6iJMGJkMMi4H-ERv8oowQxkHx1Rbmii8UDMMBgemiLB-C87KOs7I">
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary text-[10px] px-2 py-0.5 font-bold uppercase">RANK 22</div>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface uppercase mb-1">GLITCH_KWEEN</div>
+<div class="font-label-sm text-label-sm text-primary uppercase">SYSTEMS DISRUPTOR</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Win Rate</div>
+<div class="text-xl font-headline-md text-on-surface">58.9%</div>
+</div>
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Kill/Death</div>
+<div class="text-xl font-headline-md text-on-surface">2.4</div>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary font-headline-md text-headline-md uppercase hover:bg-primary hover:text-on-primary-fixed transition-all duration-200 flex items-center justify-center gap-3 hover-shake">
+<span class="">VIEW DOSSIER</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</article>
+<!-- Player Card 6: Iron_Clad -->
+<article class="bg-surface-container border border-outline-variant p-8 relative overflow-hidden group hover:border-primary transition-all duration-300">
+<div class="flex items-start justify-between mb-8">
+<div class="relative">
+<div class="w-24 h-24 border-2 border-primary p-1">
+<img class="w-full h-full object-cover" data-alt="Strong visual of Iron_Clad, a character in heavy ballistic armor with multiple scars and metallic reinforcements, industrial factory floor background with molten metal sparks, dark gritty brutalist art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8Knjimz50fkYVthioob01mB2N2D0etH3if4OA8az2aF0htk2dDKF8tZ0wVayeRJ9wWjZSdKgl7MPsGF7OHqbZ36XjhGnG3lIDjxKUv2lvTCxZ4wvMOQNRvxiN4vU5kw9bW8OFfYmWk7Hvf2ZaqHIqI3yVz1cKQSsbTgydCmj2XY5qPFdu-iV3K187MdFIN8-_s66wQUq77TDG4H5lWZCAzcpMCxUz-h6OCm2gZDNF6HnUit_oUf_uBv19Q4plwlkmyS6YHTZ5lDc">
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary text-[10px] px-2 py-0.5 font-bold uppercase">RANK 28</div>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface uppercase mb-1">IRON_CLAD</div>
+<div class="font-label-sm text-label-sm text-primary uppercase">FRONTLINE TANK</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Win Rate</div>
+<div class="text-xl font-headline-md text-on-surface">57.4%</div>
+</div>
+<div class="bg-surface-container-high p-3">
+<div class="text-[10px] text-on-surface-variant uppercase mb-1">Kill/Death</div>
+<div class="text-xl font-headline-md text-on-surface">1.2</div>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary font-headline-md text-headline-md uppercase hover:bg-primary hover:text-on-primary-fixed transition-all duration-200 flex items-center justify-center gap-3 hover-shake">
+<span class="">VIEW DOSSIER</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-20 flex justify-center items-center gap-8">
+<button class="material-symbols-outlined p-4 border border-outline-variant hover:text-primary transition-colors disabled:opacity-20" data-icon="chevron_left" disabled="">chevron_left</button>
+<div class="flex gap-4 font-label-caps text-label-caps">
+<span class="text-primary border-b-2 border-primary pb-1">01</span>
+<span class="text-on-surface-variant hover:text-on-surface cursor-pointer">02</span>
+<span class="text-on-surface-variant hover:text-on-surface cursor-pointer">03</span>
+<span class="text-on-surface-variant">...</span>
+<span class="text-on-surface-variant hover:text-on-surface cursor-pointer">42</span>
+</div>
+<button class="material-symbols-outlined p-4 border border-outline-variant hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</button>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest text-primary dark:text-primary w-full bottom-0 border-t border-outline-variant">
+<div class="flex justify-between items-center w-full px-gutter py-8 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-label-caps text-primary uppercase">COPYRIGHT 2026 STICK LEAGUE</span>
+<div class="h-4 w-px bg-outline-variant"></div>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary underline underline-offset-4 transition-all duration-300 uppercase" href="#">SEASON 01 NOW LIVE</a>
+</div>
+<div class="flex gap-6">
+<a class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="public" href="#">public</a>
+<a class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="share" href="#">share</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+
+        // Search bar interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.style.boxShadow = '0 10px 30px -10px rgba(130, 38, 33, 0.3)';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.style.boxShadow = 'none';
+        });
+    </script>
+
+
+
+
+
+
+
+
+</body></html>

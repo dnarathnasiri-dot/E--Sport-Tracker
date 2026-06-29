@@ -1,0 +1,431 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .rough-ink-border {
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        .rough-ink-border::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            z-index: -1;
+            background: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2,2 L98,3 L97,97 L3,98 Z' fill='none' stroke='%23822621' stroke-width='1.5' stroke-dasharray='2,1'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            pointer-events: none;
+            filter: contrast(150%) brightness(80%);
+        }
+        .ink-scratch-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #822621, transparent);
+            mask-image: url("data:image/svg+xml,%3Csvg width='200' height='2' viewBox='0 0 200 2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 1 L200 1' stroke='black' stroke-width='2' stroke-dasharray='1,3,2,5,1,1'/%3E%3C/svg%3E");
+        }
+        .red-inner-glow {
+            box-shadow: inset 0 0 20px rgba(130, 38, 33, 0.3);
+        }
+        .texture-overlay {
+            background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        @keyframes shake {
+            0% { transform: translate(0,0); }
+            25% { transform: translate(1px, -1px); }
+            50% { transform: translate(-1px, 1px); }
+            75% { transform: translate(1px, 1px); }
+            100% { transform: translate(0,0); }
+        }
+        .hover-shake:hover {
+            animation: shake 0.2s infinite;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#131313",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-secondary-fixed-variant": "#7d2b25",
+                        "surface-tint": "#ffb4ab",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "primary": "#ffb4ab",
+                        "on-surface-variant": "#ddc0bd",
+                        "on-error": "#690005",
+                        "secondary-container": "#802d27",
+                        "on-primary": "#630e0d",
+                        "on-secondary": "#5f1511",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#ff9f94",
+                        "surface-dim": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "outline": "#a58b88",
+                        "secondary-fixed-dim": "#ffb4ab",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#822621",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "outline-variant": "#564240",
+                        "surface-container-lowest": "#0e0e0e",
+                        "background": "#131313",
+                        "secondary": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-container": "#ff9a8f",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-container": "#822621",
+                        "secondary-fixed": "#ffdad6",
+                        "tertiary": "#c9c6c0",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary-container": "#b7b5af",
+                        "on-tertiary": "#31312c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-primary-fixed": "#410002",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#410002",
+                        "surface-container": "#201f1f",
+                        "inverse-primary": "#a23d36",
+                        "surface-variant": "#353534",
+                        "tertiary-container": "#474742",
+                        "surface-bright": "#3a3939"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Oswald"],
+                        "display-lg": ["Oswald"],
+                        "headline-lg": ["Oswald"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "letterSpacing": "0.15em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-primary-container selection:text-white">
+<div class="texture-overlay fixed inset-0 z-50"></div>
+<!-- Layout Shell -->
+<div class="flex min-h-screen">
+<!-- SIDE NAVIGATION (NavigationDrawer) -->
+<aside class="fixed inset-y-0 left-0 w-80 bg-surface-container-lowest border-r border-outline-variant z-40 flex flex-col py-8">
+<div class="px-8 mb-12">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter uppercase leading-none">STICK<br>LEAGUE</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-2">UNDERGROUND PRO</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<!-- HOME - Active -->
+<a class="flex items-center gap-4 px-4 py-4 bg-secondary-container text-on-secondary-container rounded-none border-l-4 border-primary transition-all duration-200 opacity-100 scale-100" href="{{DATA:SCREEN:SCREEN_69}}">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-caps text-label-caps">HOME</span>
+</a>
+
+<a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_41}}">
+<span class="material-symbols-outlined">emoji_events</span>
+<span class="font-label-caps text-label-caps">TOURNAMENT</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_37}}">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-caps text-label-caps">TEAMS</span>
+</a><a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings_applications</span>
+<span class="font-label-caps text-label-caps">TOURNAMENT&nbsp;</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_21}}">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-label-caps text-label-caps">ADMIN PANEL</span>
+</a>
+<div class="ink-scratch-divider my-4 mx-4"></div>
+<a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_57}}">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-caps text-label-caps">PLAYERS</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_43}}">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-caps text-label-caps">LEADERBOARD</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_61}}">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-caps text-label-caps">SEARCH</span>
+</a>
+</nav>
+<div class="px-8 mt-auto">
+<div class="flex items-center gap-3 p-3 bg-surface-container rounded border border-outline-variant/30" onclick="window.location.href='{{DATA:SCREEN:SCREEN_21}}'">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center font-bold text-on-primary">SL</div>
+<div>
+<p class="font-label-caps text-[10px] text-primary">ADMIN PANEL</p>
+<p class="font-body-md text-sm">v.2.0.4-BETA</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT -->
+<main class="ml-80 flex-1 flex flex-col">
+<!-- TOP APP BAR -->
+<header class="sticky top-0 z-30 h-20 bg-surface border-b border-secondary-container/50 flex justify-between items-center px-10">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+<span class="font-label-caps text-label-caps tracking-widest text-on-surface-variant">REGION: DARK_SUB_01</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="font-label-caps text-xs text-primary">SESSION STATUS</p>
+<p class="font-label-caps text-sm text-green-500 flex items-center gap-1 justify-end">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> ACTIVE
+                        </p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden" onclick="window.location.href='{{DATA:SCREEN:SCREEN_11}}'">
+<img class="w-full h-full object-cover" data-alt="A portrait of a gritty, high-stakes competitive gamer with cybernetic facial enhancements, illuminated by moody red neon lights in a dark industrial environment. The visual style is aggressive, Ink-stained, and modern gothic, featuring deep shadows and high contrast red highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgpMP68SxXTiYK898zK6gflXTyFrSzbX9_jgdcWJmv2I25MiK7g0CxXAYfj1H-iZZmysT2Ns8gJiUkeJkQfKvV33ZHYJsdJNf5xmR8hTZ7Kow2W9lUx0BGrRfv3lfTXwQj1FjqpScTDQ8_PrzruA2ZXobyPYwiV-NUdOz-19pLKR-HqU0rimVHmr1SrGb-9W4BqDwf_lFKpBqRZfdpZvUWqs08fqaCTUwFLwW2mYK2nUUnUyEEApi_ELwQXGDqoUUK4zu7qOaMW6g">
+</div>
+</div>
+</header>
+<!-- CANVAS CONTENT -->
+<div class="p-10 max-w-7xl mx-auto w-full space-y-12 pb-24">
+<!-- PLAYER STATUS BANNER -->
+<section class="grid grid-cols-12 gap-8 items-end">
+<div class="col-span-8 space-y-6">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-display-lg leading-none text-on-surface">LEVEL 42</span>
+<div class="ink-scratch-divider flex-1"></div>
+</div>
+<div class="relative h-4 w-full bg-surface-container-high border border-outline-variant/30">
+<div class="absolute top-0 left-0 h-full bg-primary-container red-inner-glow" style="width: 78%; opacity: 0.900064;">
+<div class="absolute right-0 top-0 h-full w-4 bg-white/20 animate-pulse"></div>
+</div>
+</div>
+<div class="flex justify-between font-label-caps text-xs">
+<span class="text-primary">XP: 145,200 / 180,000</span>
+<span class="text-on-surface-variant">TIER: ELITE STRIKER</span>
+</div>
+</div>
+<div class="col-span-4 bg-primary-container/10 p-6 border border-primary-container/30 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary-container/20 -rotate-45 translate-x-8 -translate-y-8"></div>
+<p class="font-label-caps text-xs text-primary mb-1">STREAK</p>
+<p class="font-headline-md text-headline-md leading-none text-white">12 DAYS</p>
+<p class="font-body-md text-xs text-on-surface-variant mt-2">+15% XP MULTIPLIER ACTIVE</p>
+</div>
+</section>
+<div class="grid grid-cols-12 gap-8">
+<!-- QUEST BOARD (Main Grid) -->
+<div class="col-span-8 space-y-8">
+<div class="flex items-baseline justify-between">
+<h2 class="font-headline-lg text-4xl text-on-surface uppercase tracking-tighter">QUEST BOARD</h2>
+<p class="font-label-caps text-xs text-primary">REFRESHES IN: 04:22:19</p>
+</div>
+<!-- CONTRACT BENTO GRID -->
+<div class="grid grid-cols-2 gap-6">
+<!-- High Risk Contract 1 -->
+<div class="col-span-2 group relative overflow-hidden bg-surface-container border-2 border-primary-container p-1 hover-shake transition-all duration-300">
+<div class="flex h-64">
+<div class="w-1/2 relative">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="A cinematic scene of a dark, rain-slicked alleyway at night, with a solitary figure casting a long, jagged shadow. The lighting is dominated by a single, harsh red spotlight and deep black ink-like silhouettes. The atmosphere is menacing and prestige industrial gothic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU2IurrgaCOwKuO0FCWLh06ULbcog0IwJr7pydVIsnw3xy77D2d5b9MjZSba6lXp1j2xSAHEYNXc5wTPvCg9nn1jU7bqAT8-RZnQr0ESri7z69mW9nwp91ELcqxo8Bu8lD8l-RzjklUYVwlV5xzl9DtMMmwwrYtsC2SoxUuzWQW2si5aFpvBvDGFjF0o7XY02vdprF5g1m76fzZmZ2OFeyLTwPEn578azQf5iX2oUTSEOEQhKZf7lGGJeejCDCN_FeCySCDrIpIqk">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-surface-container"></div>
+<div class="absolute top-4 left-4 bg-primary px-3 py-1 text-black font-label-caps text-[10px] font-extrabold">HIGH RISK</div>
+</div>
+<div class="w-1/2 p-8 flex flex-col justify-center space-y-4">
+<h3 class="font-headline-md text-3xl text-primary leading-tight">NIGHT CRAWLER</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Infiltrate the lower sectors without being detected. Eliminate 5 targets using only the hidden blade.</p>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant">REWARD</span>
+<span class="font-label-caps text-lg text-primary">8,000 SC</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant">XP</span>
+<span class="font-label-caps text-lg text-primary">2,500</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container text-tertiary-fixed font-label-caps hover:bg-[#a23d36] transition-colors relative rough-ink-border" onclick="window.location.href='{{DATA:SCREEN:SCREEN_49}}'">ACCEPT CONTRACT</button>
+</div>
+</div>
+</div>
+<!-- Contract 2 -->
+<div class="bg-surface-container border border-outline-variant p-6 space-y-4 group hover:border-primary/50 transition-colors">
+<div class="h-40 bg-black relative overflow-hidden">
+<img class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" data-alt="Abstract ink splatters and razor-sharp geometric lines in deep maroon and blood red on a charcoal black background. The style is gritty, hand-drawn brutalism, evoking high stakes and visceral action." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3Lsraax4smDSjtEAbgyBJbrLGOYvXK4lsHwUoBNQJ7FrzUdfo3EgYAGF6_JQzzSL8IRwrnh-T-ZxpIHi2ExKb9W2wgdn4Qg7Ya28WIu7-gOwF_xLKDvE_eNW9ababVrqbt7fYLvnb5Clv6NIa-4tGpRRipzotdjBdCIiMhAIh1rSpUVjp11mqmxGG_uPQ9l98HP5V3Y07pYnL7smd4bt6Ii7R_9DDY8KZs1V2SPDv9JyTmWweHEs_DWqa4QH1GjGVfVYH3weZye0">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary opacity-40">target</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-xl text-on-surface">SILENT STRIKE</h3>
+<p class="font-body-md text-xs text-on-surface-variant mt-2">Win 3 matches without losing a single life.</p>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-outline-variant/30">
+<span class="font-label-caps text-primary text-sm">4,500 SC</span>
+<button class="font-label-caps text-xs hover:text-primary transition-colors">DETAILS</button>
+</div>
+</div>
+<!-- Contract 3 -->
+<div class="bg-surface-container border border-outline-variant p-6 space-y-4 group hover:border-primary/50 transition-colors">
+<div class="h-40 bg-black relative overflow-hidden">
+<img class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" data-alt="A close-up of a shattered digital screen showing distorted glitch art in shades of crimson and deep black. The cracks in the screen look like jagged hand-drawn ink lines. Dark, tactical, underground aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2flndGoqJEMn1pFa80SkGZ_uI2zUGXQDq4sVyQ6-_gxXylpDNsmT9mnqm5TZpWvf3X2goCMsoyl7F5w5g9a8OybTHuQfgjfx0jNDjJ_E0_gVSRFLJlTp434UYyTqWfgxdsTKDIKcf8hTwVhfgaIX_svhgFgYAmU5zQv3v3wXMRg0OkxqSIe2ShNcJ1SK4jr4NgWeGBnbC8MeBEqJAgeSbCU_wFgvuOiES2r2N957IB1Jg7BDMkTF-vbOzVKfoU9s8Bs-F20Kv6fI">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary opacity-40">warning</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-xl text-on-surface">INK SPILL</h3>
+<p class="font-body-md text-xs text-on-surface-variant mt-2">Deal 50,000 total damage in any tournament mode.</p>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-outline-variant/30">
+<span class="font-label-caps text-primary text-sm">6,200 SC</span>
+<button class="font-label-caps text-xs hover:text-primary transition-colors">DETAILS</button>
+</div>
+</div>
+</div>
+<!-- LATEST REPLAYS VIDEO GRID -->
+<div class="space-y-6 pt-12">
+<h2 class="font-headline-lg text-2xl text-on-surface uppercase tracking-tighter border-l-4 border-primary pl-4">LATEST REPLAYS</h2>
+<div class="grid grid-cols-3 gap-4">
+<div class="aspect-video bg-surface-container-high border border-outline-variant relative group cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="A screenshot from a high-intensity action game featuring a shadowy warrior in mid-leap, surrounded by swirling red energy and black ink particles. Dark industrial background with glowing red highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp5F6cyhSYAqZ8KaFizjwRFWXsQluh5oHMi23zXade65XZXcS1z0d6k7Aaing_Rf-AyWGpRqsaRzC4jWQ-PT5CsnxpTx4uUsfrdbPbtSFvdAylwwFr1Uaug318Y8VDjZIyJFm_RRfudqbVaXH6H2H0vT_kfTfO4phyW2ip6dLgjmkHcwOPr9r6vdfr9zKKjyU2HaFXgxWqefoUjx9-g79l7ygwsJql7TlodjjW_zeIgQ8o_w94Bs4FTuW_4j55y54wsqycC8vdp3U">
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-white">play_circle</span>
+</div>
+<div class="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 font-label-caps text-[10px]">03:42</div>
+</div>
+<div class="aspect-video bg-surface-container-high border border-outline-variant relative group cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Intense close-quarters combat between two stylized characters in a dimly lit, underground arena. The scene is saturated with deep reds and blacks, with hand-drawn motion blur effects. High-prestige gaming aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLOYX6xbvJ_bVqd5kQ_osIsf3Gv88jHawGqTrdbjbNXroR1mk5_cUwcsth7BVi2s15rHFiFt33ki6ghsoBoeO1BFWIIOzYX5wGvTrE3TqzwQwMUEPal9ewYTTj0d_J12DFZeczt3Xpj6SXyacaTk-8WR41EGjsYZCrNtIpRvbwLCYoBjveKG-cZ9gu7SbzQZYhxCQz8k6RreCcSe8MH8un8d8XpjUTtEiFmMVHSt6H2U2DfpFUbUeaijELaeBAWvzSW8VWUSXOGhA">
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-white">play_circle</span>
+</div>
+<div class="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 font-label-caps text-[10px]">01:15</div>
+</div>
+<div class="aspect-video bg-surface-container-high border border-outline-variant relative group cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="A dramatic finish move in a sword fight, with a spray of stylized red ink across the screen. The background is a minimalist industrial space with sharp lighting and deep shadows. Gritty and authoritative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_xBT7A2SRTZJlDbQ81Zsu2sQnDz3M9N-8yhuBcRQ6talK1_UIPNYZSUL5Y4jemd0f6UEO7mG32GqzS6PCekNGXVgziDzQpwbNVHX2onemvHgO2PyD29GoqX1T-XLICPDI4MpgiSyNas2GcvPwkWteDW7WJWN4aPEzEqb7WC9grtgFb8Zu80nP1xZNn6vwgyy7Ma7oQlfv0rhp4xEZPp8eNh5gFNL75tx02QU4EQxGZPPom6NSZLWxOWI7qqGhoIZ1ck-kjavMyis">
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-white">play_circle</span>
+</div>
+<div class="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 font-label-caps text-[10px]">02:30</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SIDEBAR (Leaderboard & Stats) -->
+<div class="col-span-4 space-y-8">
+<!-- TOP STRIKERS LEADERBOARD -->
+<div class="bg-surface-container-lowest border border-outline-variant p-8 red-inner-glow" style="opacity: 0.994887;">
+<h3 class="font-headline-md text-xl text-primary mb-6 tracking-widest border-b border-primary/20 pb-2">TOP STRIKERS</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="font-label-caps text-lg text-primary w-6">01</span>
+<div class="w-8 h-8 bg-surface-container-highest rounded border border-primary/30"></div>
+<span class="font-label-caps text-sm group-hover:text-primary transition-colors">V0ID_WALKER</span>
+</div>
+<span class="font-label-caps text-sm text-on-surface-variant">24.5K</span>
+</div>
+<div class="ink-scratch-divider opacity-30"></div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="font-label-caps text-lg text-on-surface-variant w-6">02</span>
+<div class="w-8 h-8 bg-surface-container-highest rounded border border-outline-variant/30"></div>
+<span class="font-label-caps text-sm group-hover:text-primary transition-colors">REAPER_88</span>
+</div>
+<span class="font-label-caps text-sm text-on-surface-variant">22.1K</span>
+</div>
+<div class="ink-scratch-divider opacity-30"></div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="font-label-caps text-lg text-on-surface-variant w-6">03</span>
+<div class="w-8 h-8 bg-surface-container-highest rounded border border-outline-variant/30"></div>
+<span class="font-label-caps text-sm group-hover:text-primary transition-colors">INK_DRIP</span>
+</div>
+<span class="font-label-caps text-sm text-on-surface-variant">21.8K</span>
+</div>
+<div class="ink-scratch-divider opacity-30"></div>
+<div class="flex items-center justify-between group bg-primary-container/10 p-2 -mx-2">
+<div class="flex items-center gap-3">
+<span class="font-label-caps text-lg text-primary w-6">42</span>
+<div class="w-8 h-8 bg-primary rounded border border-primary"></div>
+<span class="font-label-caps text-sm text-primary">YOU</span>
+</div>
+<span class="font-label-caps text-sm text-primary">15.4K</span>
+</div>
+</div>
+<button class="w-full mt-8 py-3 border border-primary text-primary font-label-caps text-xs hover:bg-primary hover:text-black transition-all">VIEW FULL RANKINGS</button>
+</div>
+<!-- LIVE FEED / CHATTER -->
+<div class="bg-surface-container border border-outline-variant p-6 space-y-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<h3 class="font-label-caps text-sm text-on-surface-variant">GLOBAL CHATTER</h3>
+</div>
+<div class="space-y-3 font-body-md text-xs">
+<p class=""><span class="text-primary font-bold">CYBER_PUNK:</span> Just cleared Night Crawler on Hard. Insane.</p>
+<p class=""><span class="text-on-surface-variant font-bold">GHOST_USER:</span> Anyone looking for a squad for Season 01?</p>
+<p class=""><span class="text-primary font-bold">SL_MOD:</span> New patch coming in 2 hours. Prep up.</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30">
+<input class="w-full bg-surface-container-lowest border-b border-primary/50 text-xs py-2 focus:ring-0 focus:border-primary font-label-caps outline-none" placeholder="TYPE MESSAGE..." type="text">
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FOOTER -->
+<footer class="w-full mt-auto bg-surface-container-lowest border-t border-outline-variant py-8 px-10 flex justify-between items-center">
+<div class="flex items-center gap-6">
+<span class="font-label-caps text-primary text-xs tracking-widest">STICK LEAGUE PRO</span>
+<span class="font-label-caps text-on-surface-variant text-[10px]">COPYRIGHT 2026 STICK LEAGUE</span>
+</div>
+<div class="flex gap-8">
+<a class="font-label-caps text-primary text-xs hover:underline underline-offset-4 decoration-primary" href="#">SEASON 01 NOW LIVE</a>
+<a class="font-label-caps text-on-surface-variant text-xs hover:text-primary transition-colors" href="#">TERMS OF ENGAGEMENT</a>
+<a class="font-label-caps text-on-surface-variant text-xs hover:text-primary transition-colors" href="#">PRIVACY CODE</a>
+</div>
+</footer>
+</main>
+</div>
+<script>
+        // Micro-interactions for that tactile feel
+        document.querySelectorAll('.rough-ink-border').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.96)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+
+        // Atmospheric flicker effect on primary red elements
+        setInterval(() => {
+            const glowElements = document.querySelectorAll('.red-inner-glow');
+            glowElements.forEach(el => {
+                el.style.opacity = (Math.random() * 0.1 + 0.9).toString();
+            });
+        }, 150);
+    </script>
+
+
+
+
+
+
+</body></html>

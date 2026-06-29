@@ -1,0 +1,396 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>STICK LEAGUE | THE VOID SEARCH</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @layer base {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+                display: inline-block;
+                line-height: 1;
+                text-transform: none;
+                letter-spacing: normal;
+                word-wrap: normal;
+                white-space: nowrap;
+                direction: ltr;
+            }
+        }
+
+        /* Tactical Grid Background */
+        .tactical-grid {
+            background-image: 
+                linear-gradient(to right, rgba(130, 38, 33, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(130, 38, 33, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Hand-drawn "Rough Ink" Border Simulation */
+        .rough-border {
+            position: relative;
+            border: 2px solid #822621;
+            box-shadow: inset 0 0 15px rgba(130, 38, 33, 0.2);
+        }
+        
+        .rough-border::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 1px solid rgba(130, 38, 33, 0.3);
+            pointer-events: none;
+            clip-path: polygon(0% 2%, 5% 0%, 95% 1%, 100% 4%, 98% 95%, 94% 100%, 4% 99%, 0% 96%);
+        }
+
+        .ink-smudge {
+            filter: blur(20px);
+            background: radial-gradient(circle, rgba(130, 38, 33, 0.4) 0%, transparent 70%);
+        }
+
+        /* Shake Animation for Hover */
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-1px, 1px); }
+            50% { transform: translate(1px, -1px); }
+            75% { transform: translate(-1px, -1px); }
+            100% { transform: translate(0, 0); }
+        }
+        .hover-shake:hover {
+            animation: shake 0.15s infinite;
+        }
+
+        /* Hide Scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#131313",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-secondary-fixed-variant": "#7d2b25",
+                        "surface-tint": "#ffb4ab",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "primary": "#ffb4ab",
+                        "on-surface-variant": "#ddc0bd",
+                        "on-error": "#690005",
+                        "secondary-container": "#802d27",
+                        "on-primary": "#630e0d",
+                        "on-secondary": "#5f1511",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#ff9f94",
+                        "surface-dim": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "outline": "#a58b88",
+                        "secondary-fixed-dim": "#ffb4ab",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#822621",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "outline-variant": "#564240",
+                        "surface-container-lowest": "#0e0e0e",
+                        "background": "#131313",
+                        "secondary": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-container": "#ff9a8f",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-container": "#822621",
+                        "secondary-fixed": "#ffdad6",
+                        "tertiary": "#c9c6c0",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary-container": "#b7b5af",
+                        "on-tertiary": "#31312c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-primary-fixed": "#410002",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#410002",
+                        "surface-container": "#201f1f",
+                        "inverse-primary": "#a23d36",
+                        "surface-variant": "#353534",
+                        "tertiary-container": "#474742",
+                        "surface-bright": "#3a3939"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Oswald"],
+                        "display-lg": ["Oswald"],
+                        "headline-lg": ["Oswald"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden min-h-screen flex">
+<!-- Navigation Drawer (Side) -->
+<aside class="fixed inset-y-0 left-0 w-80 bg-surface-container dark:bg-surface-container border-r border-outline-variant hidden md:flex flex-col py-8 z-50">
+<div class="px-8 mb-12">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter">STICK LEAGUE</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-50 mt-1">EST. 2026 / PRESTIGE DIVISION</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_69}}">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">HOME</span>
+</a>
+
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_41}}">
+<span class="material-symbols-outlined">settings_applications</span>
+<span class="font-label-sm text-label-sm">TOURNAMENT&nbsp;</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_37}}">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-sm text-label-sm">TEAMS</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_57}}">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-sm text-label-sm">PLAYERS</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_43}}">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-sm text-label-sm">LEADERBOARD</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-none border-l-4 border-primary opacity-80 scale-[0.98]" href="{{DATA:SCREEN:SCREEN_61}}">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm">SEARCH</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_21}}">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-label-sm text-label-sm">ADMIN PANEL</span>
+</a>
+</nav>
+<div class="px-8 mt-auto pt-8 border-t border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-none flex items-center justify-center rough-border">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm font-bold">OPERATOR_042</p>
+<p class="text-[10px] text-primary opacity-70">LEVEL 89 STRIKER</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-80 min-h-screen flex flex-col tactical-grid relative">
+<!-- Header / Top Bar -->
+<header class="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-secondary-container/50">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl">radio_button_checked</span>
+<h2 class="text-headline-lg font-headline-lg text-primary tracking-tighter uppercase">THE VOID</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-8">
+<span class="text-on-surface-variant font-label-sm text-label-sm cursor-pointer hover:text-primary transition-colors">ARCHIVE</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm cursor-pointer hover:text-primary transition-colors">DELETION ZONE</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm cursor-pointer hover:text-primary transition-colors">INTEL</span>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A gritty, cinematic close-up of a competitive gamer in a dark, industrial room with glowing red backlighting. The gamer wears a tactical headset and has a focused, intense expression. The image has high contrast, deep shadows, and a dark, moody prestige aesthetic with subtle red light bleeding into the edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVUgBniO1tTTAMZbfvXMphPBKZRuMuKrkNKz9OChjOBI2BMmjNtjNg6bMb8jLN44fp3fKpk7GTNKHg41HHAu_pKGwEpwT1rjVYkfClGQNl0Bv5bjVtcnbWSul32Za85HoaaR4do6bdqSDh1Q6QQHCRUYM1JrWApV64zsI2LHunM4FSrovScD0hURhIX0aHmrY8OGtQf6kqidAlbeKyTc_UL5d0Y0M2jj3uJ5ar-JS4cZzwAbsauKiE-PwjGqse9W3u9cUByU_nmsA">
+</div>
+</div>
+</div>
+</header>
+<!-- Search Hub Section -->
+<section class="flex-1 px-gutter py-12 max-w-container-max mx-auto w-full flex flex-col gap-12">
+<!-- Global Search Field -->
+<div class="relative group">
+<div class="absolute inset-0 ink-smudge opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
+<div class="relative flex items-center bg-surface-container-lowest border-b-4 border-primary p-6">
+<span class="material-symbols-outlined text-primary text-4xl mr-6">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-primary font-headline-md text-headline-md w-full placeholder:opacity-30 placeholder:italic" placeholder="QUERY THE VOID..." type="text">
+<div class="flex items-center gap-2 bg-primary-container px-3 py-1 border border-primary/50">
+<span class="font-label-sm text-label-sm text-on-primary">CMD</span>
+<span class="font-label-sm text-label-sm text-on-primary opacity-50">+</span>
+<span class="font-label-sm text-label-sm text-on-primary">K</span>
+</div>
+</div>
+<!-- Animated Underline Trace -->
+<div class="absolute bottom-0 left-0 h-1 bg-white/20 w-full overflow-hidden">
+<div class="h-full bg-primary w-1/4 animate-[move_3s_linear_infinite]" style="animation: move 3s linear infinite;"></div>
+<style>
+                        @keyframes move {
+                            0% { transform: translateX(-100%); }
+                            100% { transform: translateX(400%); }
+                        }
+                    </style>
+</div>
+</div>
+<!-- Tabbed Navigation -->
+<div class="flex gap-12 border-b border-outline-variant">
+<button class="pb-4 border-b-2 border-primary text-primary font-label-sm text-label-sm tracking-widest active:scale-95 transition-transform">TOURNAMENTS</button>
+<button class="pb-4 border-b-2 border-transparent text-on-surface-variant font-label-sm text-label-sm tracking-widest hover:text-primary transition-colors">TEAMS</button>
+<button class="pb-4 border-b-2 border-transparent text-on-surface-variant font-label-sm text-label-sm tracking-widest hover:text-primary transition-colors">PLAYERS</button>
+<button class="pb-4 border-b-2 border-transparent text-on-surface-variant font-label-sm text-label-sm tracking-widest hover:text-primary transition-colors">MAPS</button>
+</div>
+<!-- Featured Content (Bento Style) -->
+<div class="grid grid-cols-12 gap-6 h-[500px]">
+<!-- Featured Live Event -->
+<div class="col-span-12 lg:col-span-8 group relative overflow-hidden rough-border bg-surface-container-low flex flex-col justify-end p-10 cursor-pointer">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105" data-alt="A sprawling underground arena set in a dark, brutalist industrial warehouse. Red laser beams cut through a thick atmosphere of smoke and ink-like mist. In the center, a holographic tournament bracket glows intensely in crimson. The scene is cinematic, high-stakes, and ominous, emphasizing the underground elite tournament atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOpfrTohxyNRWrfUdZKUP2PP8wf4HydxePBXbblwxoUC9dUUIlUpyia9s2kwsR6pEZ0kZ6UqKoJv4gJ9U3tEcFOf8OXcVoACkGWInqLqok1hjLjPtwt6wsq6T9n1twIGTvo7nkXHRMDiGz28XgOsW62s5CYpRjYMwk-Yg6IVtVqf9Us2lJKSGSJ_7sVQXwT_6jxKclHT49D1sVlvmxO0qpxA6FjhAY_M4Ja-7ZPTrh67aoHJMtacnWYvWrCW-N_Pq6xySImWXQKxw">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/60 to-transparent"></div>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<span class="flex h-3 w-3 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
+</span>
+<span class="font-label-sm text-label-sm text-error tracking-tighter font-bold uppercase">LIVE NOW</span>
+</div>
+<h3 class="font-display-lg text-display-lg text-primary leading-none mb-4">UNDERGROUND ELITE</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-8">The seasonal climax has arrived. 16 teams enter the ink. Only one squad leaves with the Prestige Crest.</p>
+<button class="bg-primary-container text-on-primary px-8 py-4 font-label-sm text-label-sm hover-shake flex items-center gap-4 w-fit">
+<span class="">ENTER THE ARENA</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Registration Card -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-high rough-border p-8 flex flex-col justify-between relative group overflow-hidden">
+<div class="absolute -top-10 -right-10 opacity-10 group-hover:rotate-12 transition-transform duration-500">
+<span class="material-symbols-outlined text-[160px] text-primary">edit_square</span>
+</div>
+<div>
+<div class="bg-primary/10 border border-primary/20 w-fit px-3 py-1 mb-6">
+<span class="font-label-sm text-label-sm text-primary">OPEN REGISTRATION</span>
+</div>
+<h4 class="font-headline-lg text-headline-lg text-on-surface mb-2 tracking-tight">INK STAIN BRAWL</h4>
+<div class="h-1 w-20 bg-primary mb-6"></div>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70 mb-4">A brutal single-elimination bracket for unranked street squads. Prove your worth in the dark.</p>
+<ul class="space-y-3 mb-8">
+<li class="flex items-center gap-3 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-sm">close</span>
+<span class="">DATE: OCT 24, 2026</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-sm">close</span>
+<span class="">PRIZE: 50,000 SC</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-sm">close</span>
+<span class="">LIMIT: 64 TEAMS</span>
+</li>
+</ul>
+</div>
+<button class="border-2 border-primary text-primary px-6 py-4 font-label-sm text-label-sm hover:bg-primary hover:text-surface-container-lowest transition-all hover-shake">
+                        REGISTER SQUAD
+                    </button>
+</div>
+</div>
+<!-- Tags / Trending Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-4">
+<div>
+<h5 class="font-label-sm text-label-sm text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+                        MOST SEARCHED
+                    </h5>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-surface-container-highest font-label-sm text-label-sm text-on-surface hover:text-primary cursor-pointer transition-colors border-l-2 border-primary/30">DART_REAPER</span>
+<span class="px-4 py-2 bg-surface-container-highest font-label-sm text-label-sm text-on-surface hover:text-primary cursor-pointer transition-colors border-l-2 border-primary/30">VALKYRIE_PROTOCOL</span>
+<span class="px-4 py-2 bg-surface-container-highest font-label-sm text-label-sm text-on-surface hover:text-primary cursor-pointer transition-colors border-l-2 border-primary/30">SHADOW_DIVISION</span>
+<span class="px-4 py-2 bg-surface-container-highest font-label-sm text-label-sm text-on-surface hover:text-primary cursor-pointer transition-colors border-l-2 border-primary/30">GHOST_INK</span>
+<span class="px-4 py-2 bg-surface-container-highest font-label-sm text-label-sm text-on-surface hover:text-primary cursor-pointer transition-colors border-l-2 border-primary/30">TOXIC_RAIN</span>
+</div>
+</div>
+<div>
+<h5 class="font-label-sm text-label-sm text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                        TRENDING INTEL
+                    </h5>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-primary/5 text-primary border border-primary/20 font-label-sm text-label-sm cursor-pointer hover:bg-primary hover:text-surface transition-all">#SEASON01_CLIMAX</span>
+<span class="px-4 py-2 bg-primary/5 text-primary border border-primary/20 font-label-sm text-label-sm cursor-pointer hover:bg-primary hover:text-surface transition-all">#VOID_UPDATE</span>
+<span class="px-4 py-2 bg-primary/5 text-primary border border-primary/20 font-label-sm text-label-sm cursor-pointer hover:bg-primary hover:text-surface transition-all">#BRAWL_ENTRY</span>
+<span class="px-4 py-2 bg-primary/5 text-primary border border-primary/20 font-label-sm text-label-sm cursor-pointer hover:bg-primary hover:text-surface transition-all">#TEAM_RECRUIT</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="mt-auto border-t border-outline-variant bg-surface-container-lowest py-8">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-gutter max-w-container-max mx-auto gap-4">
+<div class="flex items-center gap-6">
+<span class="font-label-sm text-label-sm text-primary tracking-widest font-bold">STICK LEAGUE PRO</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-50">COPYRIGHT 2026 STICK LEAGUE</span>
+</div>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">SYSTEM_STATUS: NOMINAL</a>
+<a class="font-label-sm text-label-sm text-primary underline underline-offset-4 animate-pulse" href="#">SEASON 01 NOW LIVE</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- Floating Action Decor -->
+<div class="fixed bottom-10 right-10 z-50 pointer-events-none opacity-20">
+<span class="material-symbols-outlined text-[200px] text-primary rotate-12">ink_pen</span>
+</div>
+<!-- Background Shader Overlay -->
+
+<script>
+        // Micro-interactions
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                const searchInput = document.querySelector('input[type="text"]');
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            }
+        });
+
+        // Tab Switching Logic (Visual only)
+        const tabs = document.querySelectorAll('button[class*="pb-4"]');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('border-primary', 'text-primary');
+                    t.classList.add('border-transparent', 'text-on-surface-variant');
+                });
+                tab.classList.add('border-primary', 'text-primary');
+                tab.classList.remove('border-transparent', 'text-on-surface-variant');
+            });
+        });
+    </script>
+
+
+
+
+
+
+</body></html>

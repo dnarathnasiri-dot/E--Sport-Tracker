@@ -1,0 +1,373 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 1280px; height: 1110px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>STICK LEAGUE | CREATE TOURNAMENT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Hand-drawn "Wobbly" Border Effect */
+        .rough-border {
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .rough-border::after {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border: 2px solid currentColor;
+            mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,2 L98,100 L2,98 Z' fill='none' stroke='black' stroke-width='4'/%3E%3C/svg%3E");
+            mask-size: 100% 100%;
+            pointer-events: none;
+        }
+
+        .ink-scratch {
+            background-image: linear-gradient(90deg, transparent 0%, #822621 50%, transparent 100%);
+            height: 1px;
+            opacity: 0.3;
+        }
+
+        .paper-texture {
+            background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+            background-blend-mode: overlay;
+        }
+
+        .button-shake:hover {
+            animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+            40%, 60% { transform: translate3d(2px, 0, 0); }
+        }
+
+        /* Tonal Stacking */
+        .level-0 { background-color: #0E0E0E; }
+        .level-1 { background-color: #1A0001; }
+        .level-2 { background-color: #410002; }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(130, 38, 33, 0.4);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0E0E0E;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #822621;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#1c1c18",
+                      "on-error": "#690005",
+                      "surface-dim": "#131313",
+                      "secondary-container": "#802d27",
+                      "on-secondary": "#5f1511",
+                      "primary-fixed-dim": "#ffb4ab",
+                      "secondary-fixed": "#ffdad6",
+                      "primary": "#ffb4ab",
+                      "on-background": "#e5e2e1",
+                      "on-primary-container": "#ff9a8f",
+                      "primary-container": "#822621",
+                      "inverse-on-surface": "#313030",
+                      "outline": "#a58b88",
+                      "secondary-fixed-dim": "#ffb4ab",
+                      "error-container": "#93000a",
+                      "surface-tint": "#ffb4ab",
+                      "surface-container-high": "#2a2a2a",
+                      "on-surface": "#e5e2e1",
+                      "surface-container-low": "#1c1b1b",
+                      "on-tertiary-container": "#b7b5af",
+                      "surface-bright": "#3a3939",
+                      "surface-container-lowest": "#0e0e0e",
+                      "inverse-surface": "#e5e2e1",
+                      "on-primary-fixed-variant": "#822621",
+                      "primary-fixed": "#ffdad6",
+                      "on-primary-fixed": "#410002",
+                      "on-surface-variant": "#ddc0bd",
+                      "on-secondary-fixed": "#410002",
+                      "inverse-primary": "#a23d36",
+                      "on-primary": "#630e0d",
+                      "surface-container": "#201f1f",
+                      "tertiary-container": "#474742",
+                      "secondary": "#ffb4ab",
+                      "on-tertiary": "#31312c",
+                      "surface-variant": "#353534",
+                      "surface": "#131313",
+                      "on-error-container": "#ffdad6",
+                      "tertiary": "#c9c6c0",
+                      "on-tertiary-fixed-variant": "#474742",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed": "#e5e2db",
+                      "outline-variant": "#564240",
+                      "on-secondary-container": "#ff9f94",
+                      "background": "#131313",
+                      "tertiary-fixed-dim": "#c9c6c0",
+                      "on-secondary-fixed-variant": "#7d2b25",
+                      "surface-container-highest": "#353534"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "unit": "8px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Oswald"],
+                      "display-lg": ["Oswald"],
+                      "label-sm": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Oswald"],
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Oswald"],
+                      "label-caps": ["Oswald"]
+              },
+              "fontSize": {
+                      "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="bg-surface text-primary font-headline-lg text-headline-lg tracking-tighter docked full-width top-0 sticky border-b border-secondary-container z-50">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-4 group cursor-pointer">
+<span class="material-symbols-outlined text-4xl group-active:scale-95 transition-transform">radio_button_checked</span>
+<h1 class="uppercase font-extrabold tracking-tighter" style="opacity: 1;">STICK LEAGUE</h1>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex gap-6 items-center"></nav>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden group cursor-pointer hover:border-primary transition-all">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlHby2hacFIWOqHouKzx2iX-M9a4Let7Wq0T306EVJrbgcfpdXP3NvOQZP_B8cZd8IjcjpxFZDqto8u3b9wgpaVmNxmQTlkLWGTr3wmdPKnxS97JpCEy2Kg0JFhi6gfhlFpxfPCG_EaCr2otzBDWJAM5KiQUNOCuECQK4PBx3ZCgyY1OxPpb-JplunFr6c9Csb9wdRqMHCC098jqn_XMZP_0M0X5qLW7QE5fQQv7zrE8n1pfN4CpnuEXUBhK_L-rjxRJAoKIbgc3w">
+</div>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-80px)]">
+<!-- Sidebar Navigation (Drawer) -->
+<aside class="fixed md:relative inset-y-0 left-0 w-80 bg-surface-container-lowest border-r border-outline-variant py-8 flex flex-col z-40">
+<div class="px-8 mb-10">
+<h2 class="font-headline-lg text-headline-md text-primary tracking-tighter uppercase">TOURNAMENT HQ</h2>
+<div class="ink-scratch mt-2"></div>
+</div>
+<nav class="flex-grow">
+<ul class="space-y-1"><li class=""><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_78}}"><span class="material-symbols-outlined">home</span><span class="font-label-caps text-label-caps">HOME</span></a></li><li class=""><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_21}}"><span class="material-symbols-outlined">dashboard</span><span class="font-label-caps text-label-caps">DASHBOARD</span></a></li><li class=""><a class="flex items-center gap-4 px-8 py-4 bg-secondary-container text-on-secondary-container rounded-none border-l-4 border-primary opacity-80" href="{{DATA:SCREEN:SCREEN_61}}"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_box</span><span class="font-label-caps text-label-caps">CREATE NEW</span></a></li><li class=""><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_47}}"><span class="material-symbols-outlined">settings_applications</span><span class="font-label-caps text-label-caps">TOURNAMENT MANAGEMENT</span></a></li><li class=""><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_17}}"><span class="material-symbols-outlined">admin_panel_settings</span><span class="font-label-caps text-label-caps">ADMIN PANEL</span></a></li><li class=""><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_42}}"><span class="material-symbols-outlined">groups</span><span class="font-label-caps text-label-caps">TEAMS</span></a></li><li class=""><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_64}}"><span class="material-symbols-outlined">person_search</span><span class="font-label-caps text-label-caps">PLAYERS</span></a></li><li class=""><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_50}}"><span class="material-symbols-outlined">leaderboard</span><span class="font-label-caps text-label-caps">LEADERBOARD</span></a></li><li class=""><a class="flex items-center gap-4 px-8 py-4 text-on-surface hover:bg-surface-variant transition-all duration-200" href="{{DATA:SCREEN:SCREEN_68}}"><span class="material-symbols-outlined">search</span><span class="font-label-caps text-label-caps">SEARCH</span></a></li></ul>
+</nav>
+<div class="px-8 pt-8 border-t border-outline-variant/30">
+<div class="level-1 p-4 border border-primary-container/40">
+<p class="font-label-sm text-label-sm text-primary mb-1">PRO LEAGUE STATUS</p>
+<p class="font-body-md text-xs text-on-surface-variant">Your account is eligible for tier 1 hosting.</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area (Form) -->
+<main class="flex-grow overflow-y-auto custom-scrollbar paper-texture">
+<div class="max-w-4xl mx-auto px-gutter py-12">
+<div class="mb-12">
+<h1 class="font-display-lg text-headline-lg text-primary uppercase tracking-tighter mb-2">INITIALIZE TOURNAMENT</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">Define the parameters of your clandestine operation. High stakes, ruthless competition, ink-stained glory.</p>
+</div>
+<form class="space-y-16">
+<!-- Basic Info Section -->
+<section class="space-y-8">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps text-sm">01</span>
+<h3 class="font-headline-md text-on-surface uppercase tracking-tight">CORE PARAMETERS</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-primary uppercase tracking-widest block">TOURNAMENT NAME</label>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant focus:border-primary text-on-surface py-4 px-2 transition-all font-headline-md placeholder:text-surface-variant" placeholder="e.g. THE UNDERGROUND OPEN" type="text">
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-primary uppercase tracking-widest block">PARTICIPANT LIMIT</label>
+<div class="flex items-center gap-4">
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant focus:border-primary text-on-surface py-4 px-2 transition-all font-headline-md" type="number" value="16">
+<span class="text-on-surface-variant italic">SLOTS</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-primary uppercase tracking-widest block">START DATE &amp; TIME</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-primary-container">calendar_month</span>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant focus:border-primary text-on-surface py-4 pl-10 pr-2 transition-all font-body-md appearance-none" type="datetime-local">
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-primary uppercase tracking-widest block">PRIZE POOL (STK)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-primary-container">monetization_on</span>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant focus:border-primary text-on-surface py-4 pl-10 pr-2 transition-all font-headline-md placeholder:text-surface-variant" placeholder="5,000" type="text">
+</div>
+</div>
+</div>
+</section>
+<!-- Map Selection Section -->
+<section class="space-y-8">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps text-sm">02</span>
+<h3 class="font-headline-md text-on-surface uppercase tracking-tight">TACTICAL ENVIRONMENTS</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Map Card 1 -->
+<div class="relative group cursor-pointer level-1 border-2 border-outline-variant/30 overflow-hidden hover:border-primary transition-all">
+<div class="h-40 w-full bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A dark, industrial warehouse setting for a tactical game, illuminated by flickering red neon lights. High-contrast ink shadows dominate the corners, while gritty metal textures and concrete pillars create a claustrophobic, high-stakes atmosphere. The visual style is aggressive and atmospheric, emphasizing a dark-mode, underground fighting arena aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBpW5NkcEbVjVB0G0AmfHn9cB5t2kBVO4xLVvMsn__9xjU5HjXXBG8NzfmCtoUuhLWfDaxPE4shZHTcRxseP_FcJwRNlQWsutb2vrg6tKUuM2H0j1g7RT-qiQynv3OijQWuepG3Z_FypOfYf0V2uGt01gCt9cdDGTVeQ698Pi6Z71m7WAopmWd62_bAyah7KAu2i84FypDjg4ySnVsLCUYLj5amuhL8hyNudqtFeQgt6-WXep1Q65szFBmQbVCQcfeK1tTL9Ig7cKs')"></div>
+<div class="p-4 bg-gradient-to-t from-surface-container-lowest to-transparent">
+<div class="flex justify-between items-center">
+<span class="font-headline-md text-lg text-on-surface">THE VAULT</span>
+<input checked="" class="form-checkbox bg-surface-container-lowest border-primary text-primary focus:ring-0 w-5 h-5" type="checkbox">
+</div>
+<span class="text-[10px] text-primary tracking-[0.2em] font-label-caps">INDUSTRIAL SECTOR</span>
+</div>
+</div>
+<!-- Map Card 2 -->
+<div class="relative group cursor-pointer level-1 border-2 border-outline-variant/30 overflow-hidden hover:border-primary transition-all">
+<div class="h-40 w-full bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A derelict, rain-slicked city rooftop at night with jagged silhouettes of skyscrapers in the background. The lighting is dominated by a deep red glow from a distant billboard, reflecting on wet surfaces. The scene has a visceral, hand-drawn quality with rough pen-like strokes and deep ink-stained textures, evoking a sinister urban tournament vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCFcTdzIVXnP5-jjUiG9Ns49R6FTrXz55FGpjERF_1k9b6TOXfHWSwQ5IvYKXDAf0gqY6K0SXs5fo7K2_r6VCx0NgDesWMSDdAOhrVx2igh24u-fLBvv6NmOSkulB1dfNHNcYU5DdC4z3Ie78ydPp8d5k2YfubuTKN3EPyidYHA88O0QF0CkX9TmKiKnawEBP_rOkYXj-20xF0Q0-3TFphm2bAqY2JGaxuhqjArucfUGcanVw8HcdZOEtK6EvZ0Qhjbc__K5PzBGM')"></div>
+<div class="p-4 bg-gradient-to-t from-surface-container-lowest to-transparent">
+<div class="flex justify-between items-center">
+<span class="font-headline-md text-lg text-on-surface">APEX ROOF</span>
+<input class="form-checkbox bg-surface-container-lowest border-primary text-primary focus:ring-0 w-5 h-5" type="checkbox">
+</div>
+<span class="text-[10px] text-primary tracking-[0.2em] font-label-caps">URBAN FRINGE</span>
+</div>
+</div>
+<!-- Map Card 3 -->
+<div class="relative group cursor-pointer level-1 border-2 border-outline-variant/30 overflow-hidden hover:border-primary transition-all">
+<div class="h-40 w-full bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="An underground subway tunnel, abandoned and repurposed into a competitive arena. Rusty pipes, graffiti-covered walls, and pools of dark liquid create a gritty, tactile environment. The lighting is harsh and directional, throwing long, spindly shadows across the tracks. The aesthetic is brutalist and dark, aligned with an underground gaming league style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJs0YltRPkTgsqOkXftmclMIjOd8ncYe6KIsWbs2PnEo8Rm8RZHiKvVaxhqxIq_gUAafymYImNd2Avg0SGBHRatRR0WAlY2-tKzapiJwG_EH7hBW4YFsPYDGjH5RZgqxL8WNlcsZO6S8Nvw_sJuAl8QML7XunqNx_MlkhLPtgvpU7-7p_SYKyVe1AzFwiYr12GQY-dFO37SvyCWrcwW23WykKzUcWVEjvzcr0Ln3nP-IQsZ3MsoSTsGb4r2HugA9JnWVmLPN2gias')"></div>
+<div class="p-4 bg-gradient-to-t from-surface-container-lowest to-transparent">
+<div class="flex justify-between items-center">
+<span class="font-headline-md text-lg text-on-surface">TRACK 09</span>
+<input checked="" class="form-checkbox bg-surface-container-lowest border-primary text-primary focus:ring-0 w-5 h-5" type="checkbox">
+</div>
+<span class="text-[10px] text-primary tracking-[0.2em] font-label-caps">TRANSIT HUB</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Advanced Settings -->
+<section class="space-y-8">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps text-sm">03</span>
+<h3 class="font-headline-md text-on-surface uppercase tracking-tight">ENGAGEMENT PROTOCOLS</h3>
+</div>
+<div class="level-1 p-8 border border-primary-container/20 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-headline-md text-on-surface">HARDCORE MODE</h4>
+<p class="text-sm text-on-surface-variant italic">No health regeneration. Ink bleed active.</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-surface-variant p-1 transition-all" onclick="this.classList.toggle('bg-primary'); this.classList.toggle('translate-x-6')" type="button">
+<div class="w-4 h-4 bg-on-surface rounded-full transition-all"></div>
+</button>
+</div>
+<div class="ink-scratch"></div>
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-headline-md text-on-surface">PUBLIC BROADCAST</h4>
+<p class="text-sm text-on-surface-variant italic">Visible in the global league tracker.</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary p-1 transition-all" type="button">
+<div class="w-4 h-4 bg-on-surface rounded-full translate-x-6 transition-all"></div>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Actions -->
+<div class="flex flex-col sm:flex-row gap-6 pt-8 pb-20">
+<button class="group relative flex-grow bg-primary-container text-on-primary-container font-headline-md text-xl py-6 px-12 uppercase tracking-widest button-shake overflow-hidden" type="button">
+<span class="relative z-10 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                                LAUNCH TOURNAMENT
+                            </span>
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity"></div>
+</button>
+<button class="flex-grow border-2 border-primary text-primary font-headline-md text-xl py-6 px-12 uppercase tracking-widest hover:bg-primary/5 transition-all" type="button">
+                            SAVE DRAFT
+                        </button>
+</div>
+</form>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest text-primary font-label-caps text-label-caps w-full bottom-0 border-t border-outline-variant z-50">
+<div class="flex justify-between items-center w-full px-gutter py-8 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-primary font-label-caps">COPYRIGHT 2026 STICK LEAGUE</span>
+<span class="text-on-surface-variant">/</span>
+<a class="hover:text-primary underline underline-offset-4 transition-all duration-300" href="#">SEASON 01 NOW LIVE</a>
+</div>
+<div class="flex gap-6 items-center">
+<span class="material-symbols-outlined text-sm opacity-50">verified_user</span>
+<span class="tracking-widest opacity-70">ENCRYPTED PROTOCOL ACTIVE</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple toggle logic for the custom buttons
+        document.querySelectorAll('button[type="button"]').forEach(btn => {
+            if(btn.querySelector('.w-4')) {
+                btn.addEventListener('click', () => {
+                    const circle = btn.querySelector('.w-4');
+                    btn.classList.toggle('bg-primary');
+                    btn.classList.toggle('bg-surface-variant');
+                    circle.classList.toggle('translate-x-6');
+                });
+            }
+        });
+
+        // Add some atmospheric flicker to the titles occasionally
+        setInterval(() => {
+            const h1 = document.querySelector('h1');
+            if (h1) {
+                h1.style.opacity = Math.random() > 0.98 ? '0.7' : '1';
+            }
+        }, 100);
+    </script>
+
+
+
+
+
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>
